@@ -11,7 +11,7 @@ class Login extends Component {
     event.preventDefault();
 
     this.props.login(this.state.email, this.state.password);
-    this.props.history.push('/lobby');
+    this.props.history.push('/batches');
   };
   handleChange = event => {
     this.setState({

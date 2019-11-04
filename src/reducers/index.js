@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
-
+import batches from './batches';
+import auth from './auth';
 export default combineReducers({
-  // your reducers will go here
+  batches,
+  auth
 });
