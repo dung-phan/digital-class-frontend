@@ -10,7 +10,7 @@ export default function NavBar() {
       <Link className='item' to='/login'>
         <h3>Log in</h3>
       </Link>
-      <Link className='ui teal basic button' to='/events'>
+      <Link className='ui teal basic button' to='/batches'>
         <h3>Classes</h3>
       </Link>
 
