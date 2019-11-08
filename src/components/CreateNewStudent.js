@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createBatch } from '../actions/batches';
+import { addStudent } from '../actions/students';
 
-class CreateNewBatch extends Component {
+class CreateNewStudent extends Component {
   state = {
-    batchNumber: '',
-    startDate: '',
-    endDate: ''
+    name: '',
+    photo: ''
   };
   handleChange = event => {
     //hey it's gotta be arrow function here
@@ -16,58 +15,44 @@ class CreateNewBatch extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    this.props.createBatch(this.state);
-    console.log('check what is state before setState', this.state);
-    //set the form field to be empty again
     this.setState({
-      batchNumber: '',
-      startDate: '',
-      endDate: ''
+      name: '',
+      photo: ''
     });
-    console.log('check what is state after setState', this.state);
+    console.log('what is batchid', this.props.batchId);
+    const { batchId } = this.props;
+    this.props.addStudent(batchId, this.state);
   };
   render() {
-    //const isEnabled = this.state.name.length > 0;
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
           <label>
-            Batch Number:{' '}
+            Name:{' '}
             <input
               type='text'
-              name='batchNumber'
+              name='name'
               value={this.state.name}
               onChange={this.handleChange}
             />
           </label>{' '}
           <label>
             <br />
-            Start Date:{' '}
+            Profile:{' '}
             <input
               type='text'
-              name='startDate'
-              value={this.state.startDate}
+              name='photo'
+              value={this.state.photo}
               onChange={this.handleChange}
             />
           </label>{' '}
-          <label>
-            <br />
-            End Date:
-            <input
-              type='text'
-              name='endDate'
-              value={this.state.endDate}
-              onChange={this.handleChange}
-            />
-          </label>
           <input type='submit' value='Submit' />
         </form>
       </div>
     );
   }
 }
-
 export default connect(
   null,
-  { createBatch }
-)(CreateNewBatch);
+  { addStudent }
+)(CreateNewStudent);

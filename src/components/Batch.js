@@ -3,6 +3,7 @@ import { loadBatches } from '../actions/batches';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CreateNewBatch from './CreateNewBatch';
+import NavBar from './NavBar';
 export class Batch extends Component {
   componentDidMount() {
     console.log('did component did mount works');
@@ -11,6 +12,7 @@ export class Batch extends Component {
   render() {
     return (
       <div>
+        <NavBar />
         {this.props.batches === null ? (
           'Loading...'
         ) : (
@@ -19,7 +21,7 @@ export class Batch extends Component {
             {this.props.batches.map(batch => (
               <li key={batch.id} className='ui card column'>
                 <div className='segment'>
-                  <Link className='header' to={`/batches/${batch.id}`}>
+                  <Link className='header' to={`/batches/${batch.id}/students`}>
                     Batch #{batch.batchNumber}
                   </Link>
                 </div>
@@ -48,7 +50,7 @@ const mapStateToProps = state => {
   console.log('check state auth', state.auth);
   return {
     batches: state.batches,
-    loggedIn: state.auth !== undefined
+    loggedIn: !!state.auth
   };
 };
 export default connect(

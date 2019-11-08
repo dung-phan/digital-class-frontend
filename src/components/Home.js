@@ -8,7 +8,7 @@ export default class Home extends Component {
         <NavBar />
         <h1>
           Evaluation tool for teachers
-          <div class='ui mini icon input'>
+          <div className='ui mini icon input'>
             <input
               type='text'
               placeholder='Search classes, students...'
