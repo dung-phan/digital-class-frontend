@@ -1,11 +1,15 @@
 import { USER_LOGIN } from '../actions/login';
+import { USER_LOGOUT } from '../actions/logout';
 
-export default (state = '', action = {}) => {
-  console.log('check reducer state', state);
-  console.log('check action', action);
+const token = localStorage.getItem('jwt');
+const initialState = token ? token : null;
+export default (state = initialState, action = {}) => {
   switch (action.type) {
     case USER_LOGIN:
-      return action.payload;
+      localStorage.setItem('jwt', action.payload.jwt);
+      return action.payload.jwt;
+    case USER_LOGOUT:
+      return action;
     default:
       return state;
   }
