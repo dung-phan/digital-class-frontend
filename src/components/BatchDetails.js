@@ -38,10 +38,11 @@ class BatchDetails extends React.Component {
       const studentEvaluations = this.props.evaluations.filter(
         evaluation => evaluation.studentId === student.id
       );
+      console.log('check student evaluation', studentEvaluations);
       return _.sortBy(studentEvaluations, 'date')[studentEvaluations.length - 1]
         .color;
     });
-    console.log('check get the latest', getthelatest);
+
     return getthelatest;
   };
   filterByColor = color => {
