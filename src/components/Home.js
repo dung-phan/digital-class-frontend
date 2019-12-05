@@ -13,7 +13,7 @@ export default class Home extends Component {
           className="float-right"
           alt=""
         />
-        <h2 className="float-left">
+        <h2 className="float-left subheading">
           An effective way for teachers to evaluate students
         </h2>
       </div>
