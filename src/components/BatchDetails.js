@@ -1,17 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { loadStudents, deleteStudent } from '../actions/students';
-import { loadEvaluations } from '../actions/evaluations';
-import CreateNewStudent from '../components/CreateNewStudent';
-import NavBar from './NavBar';
-import { Link } from 'react-router-dom';
-import _ from 'lodash';
+import React from "react";
+import { connect } from "react-redux";
+import { loadStudents, deleteStudent } from "../actions/students";
+import { loadEvaluations } from "../actions/evaluations";
+import CreateNewStudent from "../components/CreateNewStudent";
+import NavBar from "./NavBar";
+import { Link } from "react-router-dom";
+import _ from "lodash";
 class BatchDetails extends React.Component {
   state = {
     editMode: false,
-    studentId: Number(window.location.href.split('/').pop()),
-    studentname: '',
-    studentphoto: ''
+    studentId: Number(window.location.href.split("/").pop()),
+    studentname: "",
+    studentphoto: ""
   };
 
   async componentDidMount() {
@@ -25,7 +25,7 @@ class BatchDetails extends React.Component {
   //handle delete button
   handleDelete = studentId => {
     console.log(
-      'what is studentid and batchId',
+      "what is studentid and batchId",
       studentId,
       this.props.match.params.id
     );
@@ -38,8 +38,9 @@ class BatchDetails extends React.Component {
       const studentEvaluations = this.props.evaluations.filter(
         evaluation => evaluation.studentId === student.id
       );
-      console.log('check student evaluation', studentEvaluations);
-      return _.sortBy(studentEvaluations, 'date')[studentEvaluations.length - 1]
+      console.log("check student evaluation", studentEvaluations);
+
+      return _.sortBy(studentEvaluations, "date")[studentEvaluations.length - 1]
         .color;
     });
 
@@ -66,7 +67,7 @@ class BatchDetails extends React.Component {
 
       return {
         ...student,
-        lastEvaluation: _.sortBy(studentEvaluations, 'date')[
+        lastEvaluation: _.sortBy(studentEvaluations, "date")[
           studentEvaluations.length - 1
         ].color
       };
@@ -82,9 +83,9 @@ class BatchDetails extends React.Component {
       return colorFilter;
     };
     const randomNumber = Math.random();
-    const redStudents = filterByColor('red');
-    const greenStudents = filterByColor('green');
-    const yellowStudents = filterByColor('yellow');
+    const redStudents = filterByColor("red");
+    const greenStudents = filterByColor("green");
+    const yellowStudents = filterByColor("yellow");
     // console.log('check red students', redStudents);
     if (randomNumber <= 0.5) {
       if (redStudents.length > 0) {
@@ -112,14 +113,14 @@ class BatchDetails extends React.Component {
   };
   chooseRandomStudent = () => {
     const student = this.getRandomStudent();
-    console.log('who is selected student', student);
+    console.log("who is selected student", student);
     this.setState({ studentname: student.name, studentphoto: student.photo });
   };
   //render on the page
   render() {
-    const greenPercentage = this.showPercentage('green');
-    const yellowPercentage = this.showPercentage('yellow');
-    const redPercentage = this.showPercentage('red');
+    const greenPercentage = this.showPercentage("green");
+    const yellowPercentage = this.showPercentage("yellow");
+    const redPercentage = this.showPercentage("red");
     return (
       <div>
         <NavBar />
@@ -137,34 +138,34 @@ class BatchDetails extends React.Component {
             </h2>
             <button
               onClick={this.chooseRandomStudent}
-              className='ui basic button'
+              className="ui basic button"
             >
               Ask a question
             </button>
             Student: {this.state.studentname}
-            {this.state.studentphoto !== '' ? (
-              <img src={this.state.studentphoto} alt='student' />
+            {this.state.studentphoto !== "" ? (
+              <img src={this.state.studentphoto} alt="student" />
             ) : null}
             <br />
             <br />
             <br />
             {this.props.students === null ? (
-              'Loading...'
+              "Loading..."
             ) : (
-              <ul className='ui three column grid'>
+              <ul className="ui three column grid">
                 {this.props.students.map(student => (
-                  <li key={student.id} className='ui card column'>
-                    <div className='segment'>
+                  <li key={student.id} className="ui card column">
+                    <div className="segment">
                       <Link
-                        className='header'
+                        className="header"
                         to={`/evaluations/batches/${student.batchId}/students/${student.id}`}
                       >
                         Student
                       </Link>
                     </div>
-                    <div className='content'>
-                      <h4 className='ui sub header'>Details</h4>
-                      <img src={student.photo} alt='student' />
+                    <div className="content">
+                      <h4 className="ui sub header">Details</h4>
+                      <img src={student.photo} alt="student" />
                       <br />
                       Name: {student.name}
                       <br />
@@ -173,14 +174,14 @@ class BatchDetails extends React.Component {
                     ? 'Loading...'
                     : student.lastEvaluation.color} */}
                     </div>
-                    <button className='ui basic button'> Edit </button>
+                    <button className="ui basic button"> Edit </button>
                     <br />
                     <button
-                      className='ui basic button'
+                      className="ui basic button"
                       onClick={() => this.handleDelete(student.id)}
                     >
-                      {' '}
-                      Delete{' '}
+                      {" "}
+                      Delete{" "}
                     </button>
                   </li>
                 ))}
@@ -191,7 +192,7 @@ class BatchDetails extends React.Component {
             <CreateNewStudent batchId={this.props.match.params.id} />
           </div>
         ) : (
-          <Link to='/login'>Please log in to see the class performance</Link>
+          <Link to="/login">Please log in to see the class performance</Link>
         )}
       </div>
     );
@@ -199,14 +200,15 @@ class BatchDetails extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log('check state in mapStatetoprops', state);
+  console.log("check state in mapStatetoprops", state);
   return {
     students: state.students,
     evaluations: state.evaluations,
     loggedIn: !!state.auth
   };
 };
-export default connect(
-  mapStateToProps,
-  { loadStudents, deleteStudent, loadEvaluations }
-)(BatchDetails);
+export default connect(mapStateToProps, {
+  loadStudents,
+  deleteStudent,
+  loadEvaluations
+})(BatchDetails);
