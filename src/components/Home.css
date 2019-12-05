@@ -12,7 +12,7 @@ body {
   color: rgb(5, 5, 5);
   transform: translate(60px, 200px);
 }
-h2 {
+.subheading {
   font-family: "Alegreya", serif;
   color: rgb(5, 5, 5);
   transform: translate(60px, 210px);
@@ -23,4 +23,19 @@ h3 {
   font-family: "Barlow Condensed", serif;
   text-transform: uppercase;
   font-size: 20px;
+}
+.content {
+  font-family: "Alegreya", serif;
+  color: rgb(5, 5, 5);
+  font-size: 27px;
+}
+.content-two {
+  font-family: "Alegreya", serif;
+  color: rgb(5, 5, 5);
+  padding-top: 3%;
+  font-size: 27px;
+}
+p {
+  font-family: "Alegreya", serif;
+  font-size: 18px;
 }
