@@ -1,20 +1,26 @@
-body {
-  background-image: linear-gradient(
-      to bottom,
-      rgba(169, 169, 169, 0.25),
-      rgba(165, 165, 165, 0.248)
-    ),
-    url(https://images.unsplash.com/photo-1494253109108-2e30c049369b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80);
-
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
+* {
+  box-sizing: border-box;
 }
-h1 {
-  font-size: 60px;
-  color: white;
+body {
+  background-color: #f2f2f2;
+}
+.heading {
+  font-family: "Permanent Marker", serif;
+  font-size: 70px;
+  line-height: 69px;
+  font-weight: bold;
+  color: rgb(5, 5, 5);
+  transform: translate(60px, 200px);
+}
+h2 {
+  font-family: "Alegreya", serif;
+  color: rgb(5, 5, 5);
+  transform: translate(60px, 210px);
+  padding: 5px;
+  font-size: 27px;
 }
 h3 {
-  color: rgb(255, 255, 255);
-  font-size: 16px;
+  font-family: "Barlow Condensed", serif;
+  text-transform: uppercase;
+  font-size: 20px;
 }

@@ -4,6 +4,7 @@ import { loadStudent, editStudent } from '../actions/students';
 import { evaluateStudent, addEvaluation } from '../actions/evaluations';
 import StudentForm from './StudentForm';
 //import { Link } from 'react-router-dom';
+import NavBar from './NavBar';
 export class EvaluationPage extends Component {
   state = {
     studentId: Number(window.location.href.split('/').pop()),
@@ -80,6 +81,7 @@ export class EvaluationPage extends Component {
   render() {
     return (
       <div>
+        <NavBar />
         {this.state.editMode && (
           <StudentForm
             onSubmit={this.onSubmit}
