@@ -69,3 +69,6 @@ p {
   font-family: "Alegreya", serif;
   font-size: 18px;
 }
+mark {
+  background-color: red;
+}

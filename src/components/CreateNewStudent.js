@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { addStudent } from '../actions/students';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { addStudent } from "../actions/students";
 
 class CreateNewStudent extends Component {
   state = {
-    name: '',
-    photo: ''
+    name: "",
+    photo: ""
   };
   handleChange = event => {
     //hey it's gotta be arrow function here
@@ -16,43 +16,57 @@ class CreateNewStudent extends Component {
     event.preventDefault();
 
     this.setState({
-      name: '',
-      photo: ''
+      name: "",
+      photo: ""
     });
-    console.log('what is batchid', this.props.batchId);
+    console.log("what is batchid", this.props.batchId);
     const { batchId } = this.props;
     this.props.addStudent(batchId, this.state);
   };
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:{' '}
-            <input
-              type='text'
-              name='name'
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
-          </label>{' '}
-          <label>
-            <br />
-            Profile:{' '}
-            <input
-              type='text'
-              name='photo'
-              value={this.state.photo}
-              onChange={this.handleChange}
-            />
-          </label>{' '}
-          <input type='submit' value='Submit' />
-        </form>
+        <h2>Want to add a new student?</h2>
+        <div className="ui middle aligned center aligned grid">
+          <div
+            className="column form"
+            style={{ maxWidth: 350, marginBottom: "15px" }}
+          >
+            <form
+              onSubmit={this.handleSubmit}
+              className="ui large form two fields"
+            >
+              <div className="ui stacked segment">
+                <div className="ui field">
+                  <label>
+                    Name:
+                    <input
+                      type="text"
+                      name="name"
+                      value={this.state.name}
+                      onChange={this.handleChange}
+                    />
+                  </label>
+                </div>
+                <div className="ui field">
+                  <label>
+                    Profile picture:
+                    <input
+                      type="text"
+                      name="photo"
+                      placeholder="Please provide a URL"
+                      value={this.state.photo}
+                      onChange={this.handleChange}
+                    />
+                  </label>
+                </div>
+                <input type="submit" value="Submit" className="ui button" />
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     );
   }
 }
-export default connect(
-  null,
-  { addStudent }
-)(CreateNewStudent);
+export default connect(null, { addStudent })(CreateNewStudent);

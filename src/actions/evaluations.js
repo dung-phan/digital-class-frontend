@@ -1,8 +1,8 @@
-import superagent from 'superagent';
-import { baseUrl } from '../constants';
-export const STUDENT_EVALUATED = 'STUDENT_EVALUATED';
-export const STUDENT_EVALUATION_ADDED = 'STUDENT_EVALUATION_ADDED';
-export const EVALUATIONS_FETCHED = 'EVALUATIONS_FETCHED';
+import superagent from "superagent";
+import { baseUrl } from "../constants";
+export const STUDENT_EVALUATED = "STUDENT_EVALUATED";
+export const STUDENT_EVALUATION_ADDED = "STUDENT_EVALUATION_ADDED";
+export const EVALUATIONS_FETCHED = "EVALUATIONS_FETCHED";
 const studentEvaluate = studentEv => ({
   type: STUDENT_EVALUATED,
   studentEv
@@ -16,18 +16,18 @@ const studentEvaluations = evaluations => ({
   evaluations
 });
 export const evaluateStudent = (batchId, id) => dispatch => {
-  console.log('what is batch id and id', batchId, id);
-  superagent(`${baseUrl}/evaluations/batches/${batchId}/students/${id}`)
+  console.log("what is batch id and id", batchId, id);
+  superagent(`${baseUrl}/batches/${batchId}/students/${id}/evaluations`)
     .then(response => dispatch(studentEvaluate(response.body)))
     .catch(console.error);
 };
-export const addEvaluation = (id, color, date, remark) => dispatch => {
-  console.log('what is id', id);
+export const addEvaluation = (batchId, id, color, date, remark) => dispatch => {
+  console.log("what is id", batchId, id);
   superagent
-    .post(`${baseUrl}/evaluations/students/${id}`)
+    .post(`${baseUrl}/batches/${batchId}/students/${id}`)
     // .set('Authorization', `Bearer ${getState().user}`)
     .send({ color: color, date: date, remark: remark }) //send the event data to the server
-    .then(() => console.log('Check what i sent', { color, date, remark }))
+    .then(() => console.log("Check what i sent", { color, date, remark }))
     .then(() => dispatch(studentEvaluationAdd({ color, date, remark })))
     .catch(console.error);
 };
