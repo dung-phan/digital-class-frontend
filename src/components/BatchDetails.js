@@ -40,8 +40,8 @@ class BatchDetails extends React.Component {
       );
       console.log("check student evaluation", studentEvaluations);
 
-      return _.sortBy(studentEvaluations, "date")[studentEvaluations.length - 1]
-        .color;
+      // return _.sortBy(studentEvaluations, "date")[studentEvaluations.length - 1]
+      //   .color;
     });
 
     return getthelatest;
@@ -154,7 +154,16 @@ class BatchDetails extends React.Component {
             ) : (
               <ul className="ui three column grid">
                 {this.props.students.map(student => (
-                  <li key={student.id} className="ui card column">
+                  <li
+                    key={student.id}
+                    className="ui card column"
+                    style={{
+                      marginLeft: "5%",
+                      marginRight: "5%",
+                      width: "20%",
+                      marginTop: "7%"
+                    }}
+                  >
                     <div className="segment">
                       <Link
                         className="header"
@@ -165,7 +174,11 @@ class BatchDetails extends React.Component {
                     </div>
                     <div className="content">
                       <h4 className="ui sub header">Details</h4>
-                      <img src={student.photo} alt="student" />
+                      <img
+                        src={student.photo}
+                        alt="student"
+                        className="ui image"
+                      />
                       <br />
                       Name: {student.name}
                       <br />

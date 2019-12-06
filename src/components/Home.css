@@ -4,6 +4,9 @@
 body {
   background-color: #f2f2f2;
 }
+.containerx {
+  background: url(http://embacy.io/images/ver1.svg);
+}
 .heading {
   font-family: "Permanent Marker", serif;
   font-size: 70px;
@@ -11,6 +14,15 @@ body {
   font-weight: bold;
   color: rgb(5, 5, 5);
   transform: translate(60px, 200px);
+}
+.top-heading {
+  font-family: "Permanent Marker", serif;
+  font-size: 70px;
+  line-height: 69px;
+  font-weight: bold;
+  color: rgb(5, 5, 5);
+  margin-top: 5%;
+  text-align: center;
 }
 .subheading {
   font-family: "Alegreya", serif;
@@ -23,6 +35,24 @@ h3 {
   font-family: "Barlow Condensed", serif;
   text-transform: uppercase;
   font-size: 20px;
+}
+h4 {
+  font-family: "Barlow Condensed", serif;
+  text-transform: uppercase;
+  font-size: 17px;
+}
+h2 {
+  font-family: "Alegreya", serif;
+  color: rgb(5, 5, 5);
+  font-size: 23px;
+  text-align: center;
+}
+h5 {
+  font-family: "Barlow Condensed", serif;
+  color: rgb(5, 5, 5);
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 100;
 }
 .content {
   font-family: "Alegreya", serif;
