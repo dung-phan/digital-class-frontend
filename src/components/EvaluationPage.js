@@ -7,7 +7,7 @@ import StudentForm from "./StudentForm";
 import NavBar from "./NavBar";
 export class EvaluationPage extends Component {
   state = {
-    studentId: Number(window.location.href.split("/").pop()),
+    studentId: this.props.match.params.studentId,
     color: "",
     date: "",
     remark: "",
@@ -41,7 +41,6 @@ export class EvaluationPage extends Component {
       this.state.studentId,
       this.state.formValues
     );
-    console.log("What is this.props.match", this.props.match);
   };
 
   //handle remarks
@@ -49,7 +48,8 @@ export class EvaluationPage extends Component {
     event.preventDefault();
 
     const { studentId, color, date, remark } = this.state;
-    this.props.addEvaluation(studentId, color, date, remark);
+    const batchId = this.props.match.params.batchId;
+    this.props.addEvaluation(batchId, studentId, color, date, remark);
     this.setState({
       color: "",
       date: "",
@@ -71,11 +71,11 @@ export class EvaluationPage extends Component {
   componentDidMount() {
     this.props.loadStudent(
       this.props.match.params.batchId,
-      this.state.studentId
+      this.props.match.params.studentId
     );
     this.props.evaluateStudent(
       this.props.match.params.batchId,
-      this.state.studentId
+      this.props.match.params.studentId
     );
   }
   render() {
@@ -115,12 +115,12 @@ export class EvaluationPage extends Component {
                 <p>Latest grade:</p>
                 <ul>
                   {this.props.grades.map(grade => (
-                    <li key={grade.id}>{grade.color}</li>
+                    <i className={grade.color + " large square full icon"}></i>
                   ))}
                 </ul>
               </div>
             </div>
-            <div class="ui bottom attached button">
+            <div className="ui bottom attached button">
               <button onClick={this.onEdit} className="ui basic button">
                 Edit{" "}
               </button>

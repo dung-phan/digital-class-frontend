@@ -1,8 +1,8 @@
-import superagent from 'superagent';
-import { baseUrl } from '../constants';
-export const BATCHES_FETCHED = 'BATCHES_FETCHED';
-export const BATCH_CREATED = 'BATCH_CREATED';
-export const BATCH_FETCHED = 'BATCH_FETCHED';
+import superagent from "superagent";
+import { baseUrl } from "../constants";
+export const BATCHES_FETCHED = "BATCHES_FETCHED";
+export const BATCH_CREATED = "BATCH_CREATED";
+export const BATCH_FETCHED = "BATCH_FETCHED";
 
 const batchesFetched = batches => ({
   type: BATCHES_FETCHED,
@@ -25,22 +25,21 @@ export const loadBatches = () => dispatch => {
 };
 
 export const createBatch = batch => (dispatch, getState) => {
-  console.log('what is batch', batch);
   const token = getState().auth;
   superagent
     .post(`${baseUrl}/batches`)
-    .set('Authorization', `Bearer ${token}`)
+    // .set('Authorization', `Bearer ${token}`)
     .send(batch) //send the event data to the server
     .then(response => dispatch(batchCreate(response.body)))
     .catch(console.error);
 };
 
 export const loadBatch = id => (dispatch, getState) => {
-  console.log('check getState', getState());
+  console.log("check getState", getState());
   const token = getState().auth;
 
   superagent(`${baseUrl}/batches/${id}`)
-    .set('Authorization', `Bearer ${token}`)
+    .set("Authorization", `Bearer ${token}`)
     .then(response => dispatch(batchFetched(response.body)))
     .catch(console.error);
 };

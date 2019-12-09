@@ -61,7 +61,10 @@ export class Batch extends Component {
         {this.props.loggedIn ? (
           <CreateNewBatch />
         ) : (
-          <Link to="/login">Please log in to create classes</Link>
+          <Link to="/login">
+            {" "}
+            <div className="content">Please log in to create classes</div>
+          </Link>
         )}
       </div>
     );
