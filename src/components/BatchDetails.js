@@ -6,6 +6,8 @@ import CreateNewStudent from "../components/CreateNewStudent";
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
 import _ from "lodash";
+import { Progress } from "react-sweet-progress";
+import "react-sweet-progress/lib/style.css";
 class BatchDetails extends React.Component {
   state = {
     editMode: false,
@@ -15,10 +17,7 @@ class BatchDetails extends React.Component {
   };
 
   async componentDidMount() {
-    await this.props.loadEvaluations(
-      this.props.match.params.id,
-      this.state.studentId
-    );
+    await this.props.loadEvaluations(this.props.match.params.id);
     this.props.loadStudents(this.props.match.params.id);
   }
 
@@ -39,11 +38,12 @@ class BatchDetails extends React.Component {
         evaluation => evaluation.studentId === student.id
       );
       console.log("check student evaluation", studentEvaluations);
-
-      // return _.sortBy(studentEvaluations, "date")[studentEvaluations.length - 1]
-      //   .color;
+      if (studentEvaluations.length > 0) {
+        return _.sortBy(studentEvaluations, "date")[
+          studentEvaluations.length - 1
+        ].color;
+      }
     });
-
     return getthelatest;
   };
   filterByColor = color => {
@@ -116,6 +116,7 @@ class BatchDetails extends React.Component {
     console.log("who is selected student", student);
     this.setState({ studentname: student.name, studentphoto: student.photo });
   };
+
   //render on the page
   render() {
     const greenPercentage = this.showPercentage("green");
@@ -126,29 +127,46 @@ class BatchDetails extends React.Component {
         <NavBar />
         {this.props.loggedIn ? (
           <div>
-            <h1>Class performance:</h1>
-            <br />
-            <h2>
-              Green: {greenPercentage} %
-              <br />
-              Yellow: {yellowPercentage} %
-              <br />
-              Red: {redPercentage} %
-              <br />
-            </h2>
-            <button
-              onClick={this.chooseRandomStudent}
-              className="ui basic button"
+            <div className="top-heading" style={{ marginBottom: "30px" }}>
+              Class details
+            </div>
+            <div
+              className="ui card"
+              style={{
+                width: "20%",
+                margin: "0 auto",
+                padding: "10px"
+              }}
             >
-              Ask a question
-            </button>
+              <Progress
+                percent={greenPercentage}
+                theme={{ active: { color: "green" } }}
+                style={{ width: 200 }}
+              />
+
+              <Progress
+                percent={redPercentage}
+                theme={{ active: { color: "red" } }}
+                style={{ width: 200 }}
+              />
+              <Progress
+                percent={yellowPercentage}
+                theme={{ active: { color: "#fbc630" } }}
+                style={{ width: 200 }}
+              />
+            </div>
+            <div style={{ width: "15%", margin: "0 auto", padding: "10px" }}>
+              <button
+                onClick={this.chooseRandomStudent}
+                className="ui basic button"
+              >
+                Ask a question
+              </button>
+            </div>
             Student: {this.state.studentname}
             {this.state.studentphoto !== "" ? (
               <img src={this.state.studentphoto} alt="student" />
             ) : null}
-            <br />
-            <br />
-            <br />
             {this.props.students === null ? (
               "Loading..."
             ) : (
@@ -167,7 +185,7 @@ class BatchDetails extends React.Component {
                     <div className="segment">
                       <Link
                         className="header"
-                        to={`/evaluations/batches/${student.batchId}/students/${student.id}`}
+                        to={`/batches/${student.batchId}/students/${student.id}/evaluations`}
                       >
                         Student
                       </Link>
@@ -187,8 +205,7 @@ class BatchDetails extends React.Component {
                     ? 'Loading...'
                     : student.lastEvaluation.color} */}
                     </div>
-                    <button className="ui basic button"> Edit </button>
-                    <br />
+
                     <button
                       className="ui basic button"
                       onClick={() => this.handleDelete(student.id)}

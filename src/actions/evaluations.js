@@ -16,24 +16,21 @@ const studentEvaluations = evaluations => ({
   evaluations
 });
 export const evaluateStudent = (batchId, id) => dispatch => {
-  console.log("what is batch id and id", batchId, id);
   superagent(`${baseUrl}/batches/${batchId}/students/${id}/evaluations`)
     .then(response => dispatch(studentEvaluate(response.body)))
     .catch(console.error);
 };
 export const addEvaluation = (batchId, id, color, date, remark) => dispatch => {
-  console.log("what is id", batchId, id);
   superagent
-    .post(`${baseUrl}/batches/${batchId}/students/${id}`)
+    .post(`${baseUrl}/batches/${batchId}/students/${id}/evaluations`)
     // .set('Authorization', `Bearer ${getState().user}`)
-    .send({ color: color, date: date, remark: remark }) //send the event data to the server
-    .then(() => console.log("Check what i sent", { color, date, remark }))
+    .send({ color: color, date: date, remark: remark })
     .then(() => dispatch(studentEvaluationAdd({ color, date, remark })))
     .catch(console.error);
 };
 //load evaluations of a single batch
 export const loadEvaluations = batchId => dispatch => {
-  superagent(`${baseUrl}/evaluations/batches/${batchId}`)
+  superagent(`${baseUrl}/batches/${batchId}/evaluations`)
     .then(response => dispatch(studentEvaluations(response.body)))
     .catch(console.error);
 };
