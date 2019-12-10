@@ -37,7 +37,6 @@ class BatchDetails extends React.Component {
       const studentEvaluations = this.props.evaluations.filter(
         evaluation => evaluation.studentId === student.id
       );
-      console.log("check student evaluation", studentEvaluations);
       if (studentEvaluations.length > 0) {
         return _.sortBy(studentEvaluations, "date")[
           studentEvaluations.length - 1

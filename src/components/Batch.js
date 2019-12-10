@@ -58,23 +58,22 @@ export class Batch extends Component {
         )}
         <br />
 
-        {this.props.loggedIn ? (
-          <CreateNewBatch />
-        ) : (
+        {/* {this.props.loggedIn ? ( */}
+        <CreateNewBatch />
+        {/* ) : (
           <Link to="/login">
             {" "}
             <div className="content">Please log in to create classes</div>
           </Link>
-        )}
+        )} */}
       </div>
     );
   }
 }
 const mapStateToProps = state => {
-  console.log("check state auth", state.auth);
   return {
-    batches: state.batches,
-    loggedIn: !!state.auth
+    batches: state.batches
+    // loggedIn: !!state.auth
   };
 };
 export default connect(mapStateToProps, { loadBatches })(Batch);
