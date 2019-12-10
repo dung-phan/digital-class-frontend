@@ -1,8 +1,6 @@
 import React from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { logout } from "../actions/logout";
 class NavBar extends React.Component {
   render() {
     return (
@@ -21,11 +19,7 @@ class NavBar extends React.Component {
         </Link>
 
         <div className="right menu">
-          <Link
-            onClick={this.props.logout}
-            className="ui inverted button"
-            to="/signup"
-          >
+          <Link className="ui inverted button" to="/signup">
             <h3>Logout</h3>
           </Link>
         </div>
@@ -33,4 +27,4 @@ class NavBar extends React.Component {
     );
   }
 }
-export default connect(null, { logout })(NavBar);
+export default NavBar;
