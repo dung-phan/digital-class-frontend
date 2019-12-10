@@ -64,13 +64,14 @@ class BatchDetails extends React.Component {
       const studentEvaluations = this.props.evaluations.filter(
         evaluation => evaluation.studentId === student.id
       );
-
-      return {
-        ...student,
-        lastEvaluation: _.sortBy(studentEvaluations, "date")[
-          studentEvaluations.length - 1
-        ].color
-      };
+      if (studentEvaluations.length > 0) {
+        return {
+          ...student,
+          lastEvaluation: _.sortBy(studentEvaluations, "date")[
+            studentEvaluations.length - 1
+          ].color
+        };
+      }
     });
     return getthelatest;
   };
@@ -162,6 +163,7 @@ class BatchDetails extends React.Component {
               >
                 Ask a question
               </button>
+              });
             </div>
             Student: {this.state.studentname}
             {this.state.studentphoto !== "" ? (

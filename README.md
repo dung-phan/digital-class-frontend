@@ -1,68 +1,42 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8a91c235-7004-403c-9efb-2a3bc9065c70/deploy-status)](https://app.netlify.com/sites/dog-quiz/deploys)
 
-## Available Scripts
+# DIGITAL CLASS
 
-In the project directory, you can run:
+## [ Check out the deployed version here! ](https://dog-quiz.netlify.com)
 
-### `npm start`
+## What this project is about
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This is my own attempt during 4 days to build a full stack React app for the final test at the Academy.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Table of contents:
 
-### `npm test`
+- **[Technologies used](#technologies-used)**
+- **[Features](#features)**
+- **[create-react-app-docs](#create-react-app)**
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies used
 
-### `npm run build`
+#### 👀👇 Click links to view some samples in this project 👇👀
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **[react](./src/components/EvaluationPage.js)**
+- **[redux](./src/reducers/evaluations.js)**
+- **[redux-thunk](./src/actions/students.js)**
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+As a teacher:
 
-### `npm run eject`
+- You can sign up with your email and password
+- After signing in, you can see a list of classes, identified with class number, start date and end date (ie: Class #1)
+- You can create a new class
+- You can add, edit and remove students in a class
+- When clicking on a class, you can see a list of students and the progress of that class (based on their last performance)
+- For each student, you can add evaluations to their performace of the tests, with RED equal to FAILED, YELLOW equal to PASSES, and GREEN equal to GOOD JOB.
+- You can only fill in one evaluation per day.
+- YOu can choose to ask students questions, based on an algorithm calculation (based on their latest performance): students with RED will have 50% of chances, while those with YELLOW and GREEN card will get 33% and 17% respectively.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Create React App
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This project was scaffolded using the create-react-app cli.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+**[The standard create-react-app docs can be found in here](./create-react-app-docs.md)**
