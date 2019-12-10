@@ -13,7 +13,7 @@ export class Batch extends Component {
     return (
       <div className="containerx">
         <NavBar />
-        <div className="top-heading">Batch details</div>
+        <div className="top-heading">Class list</div>
         {this.props.batches === null ? (
           "Loading..."
         ) : (
@@ -24,8 +24,6 @@ export class Batch extends Component {
               className="float-left"
             />
             <ul className="ui three column grid">
-              {console.log("check the props", this.props)}
-
               {this.props.batches.map(batch => (
                 <li
                   key={batch.id}
@@ -42,7 +40,7 @@ export class Batch extends Component {
                       className="header"
                       to={`/batches/${batch.id}/students`}
                     >
-                      <h3>Batch #{batch.batchNumber}</h3>
+                      <h3>Class #{batch.batchNumber}</h3>
                     </Link>
                   </div>
                   <div className="content">

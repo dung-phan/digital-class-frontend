@@ -86,7 +86,6 @@ class BatchDetails extends React.Component {
     const redStudents = filterByColor("red");
     const greenStudents = filterByColor("green");
     const yellowStudents = filterByColor("yellow");
-    // console.log('check red students', redStudents);
     if (randomNumber <= 0.5) {
       if (redStudents.length > 0) {
         return redStudents[Math.floor(Math.random() * redStudents.length)];
@@ -113,7 +112,6 @@ class BatchDetails extends React.Component {
   };
   chooseRandomStudent = () => {
     const student = this.getRandomStudent();
-    console.log("who is selected student", student);
     this.setState({ studentname: student.name, studentphoto: student.photo });
   };
 
@@ -129,7 +127,20 @@ class BatchDetails extends React.Component {
           <div>
             <div className="top-heading" style={{ marginBottom: "30px" }}>
               Class details
+              <img
+                src="http://embacy.io/images/E.svg"
+                alt=""
+                className="float-right"
+                style={{ transform: "translate(0px, 50px)" }}
+              />
+              <img
+                src="http://embacy.io/images/B.svg"
+                alt=""
+                className="float-right"
+                style={{ transform: "translate(0px, 30px)" }}
+              />
             </div>
+
             <div
               className="ui card"
               style={{
@@ -138,6 +149,7 @@ class BatchDetails extends React.Component {
                 padding: "10px"
               }}
             >
+              <h4 className="center aligned">Class performance:</h4>
               <Progress
                 percent={greenPercentage}
                 theme={{ active: { color: "green" } }}
@@ -154,68 +166,74 @@ class BatchDetails extends React.Component {
                 theme={{ active: { color: "#fbc630" } }}
                 style={{ width: 200 }}
               />
+              <div className="ui card" style={{}}>
+                <div className="image">
+                  {this.state.studentphoto !== "" ? (
+                    <img src={this.state.studentphoto} alt="student" />
+                  ) : (
+                    <h4 className="center aligned">Ask a random student</h4>
+                  )}
+                </div>
+                <div className="content">
+                  <h3> {this.state.studentname}</h3>
+                </div>
+                <div className="extra content center aligned">
+                  <button
+                    onClick={this.chooseRandomStudent}
+                    className="ui basic button "
+                  >
+                    Click here
+                  </button>
+                </div>
+              </div>
             </div>
-            <div style={{ width: "15%", margin: "0 auto", padding: "10px" }}>
-              <button
-                onClick={this.chooseRandomStudent}
-                className="ui basic button"
-              >
-                Ask a question
-              </button>
-              });
-            </div>
-            Student: {this.state.studentname}
-            {this.state.studentphoto !== "" ? (
-              <img src={this.state.studentphoto} alt="student" />
-            ) : null}
-            {this.props.students === null ? (
+
+            {!this.props.students ? (
               "Loading..."
             ) : (
               <ul className="ui three column grid">
-                {this.props.students.map(student => (
-                  <li
-                    key={student.id}
-                    className="ui card column"
-                    style={{
-                      marginLeft: "5%",
-                      marginRight: "5%",
-                      width: "20%",
-                      marginTop: "7%"
-                    }}
-                  >
-                    <div className="segment">
-                      <Link
-                        className="header"
-                        to={`/batches/${student.batchId}/students/${student.id}/evaluations`}
-                      >
-                        Student
-                      </Link>
-                    </div>
-                    <div className="content">
-                      <h4 className="ui sub header">Details</h4>
-                      <img
-                        src={student.photo}
-                        alt="student"
-                        className="ui image"
-                      />
-                      <br />
-                      Name: {student.name}
-                      <br />
-                      {/* Last grade:
-                  {student.lastEvaluation === 'undefined'
-                    ? 'Loading...'
-                    : student.lastEvaluation.color} */}
-                    </div>
-
-                    <button
-                      className="ui basic button"
-                      onClick={() => this.handleDelete(student.id)}
+                {this.props.students &&
+                  this.props.students.map(student => (
+                    <li
+                      key={student.id}
+                      className="ui card column"
+                      style={{
+                        marginLeft: "5%",
+                        marginRight: "5%",
+                        width: "20%",
+                        marginTop: "7%"
+                      }}
                     >
-                      {" "}
-                      Delete{" "}
-                    </button>
-                  </li>
-                ))}
+                      <div className="segment">
+                        <Link
+                          className="header"
+                          to={`/batches/${student.batchId}/students/${student.id}/evaluations`}
+                        >
+                          Student #{student.id}
+                        </Link>
+                      </div>
+                      <div className="content">
+                        <h4 className="ui sub header">Details</h4>
+                        <img
+                          src={student.photo}
+                          alt="student"
+                          className="ui image"
+                        />
+                        <br />
+                        <br />
+                        Name: {student.name}
+                        <br />
+                      </div>
+
+                      <button
+                        className="ui basic button"
+                        onClick={() => this.handleDelete(student.id)}
+                      >
+                        {" "}
+                        Delete{" "}
+                      </button>
+                    </li>
+                  ))}
               </ul>
             )}
             <br />
