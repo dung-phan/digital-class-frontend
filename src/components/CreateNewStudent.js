@@ -19,7 +19,6 @@ class CreateNewStudent extends Component {
       name: "",
       photo: ""
     });
-    console.log("what is batchid", this.props.batchId);
     const { batchId } = this.props;
     this.props.addStudent(batchId, this.state);
   };

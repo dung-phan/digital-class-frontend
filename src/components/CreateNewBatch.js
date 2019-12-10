@@ -17,17 +17,14 @@ class CreateNewBatch extends Component {
     event.preventDefault();
 
     this.props.createBatch(this.state);
-    console.log("check what is state before setState", this.state);
     //set the form field to be empty again
     this.setState({
       batchNumber: "",
       startDate: "",
       endDate: ""
     });
-    console.log("check what is state after setState", this.state);
   };
   render() {
-    //const isEnabled = this.state.name.length > 0;
     return (
       <div>
         <h2>Want to create a new batch?</h2>

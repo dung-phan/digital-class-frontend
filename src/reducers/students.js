@@ -5,7 +5,6 @@ import {
 } from "../actions/students";
 
 export default (state = [], action = {}) => {
-  console.log("what is action", action);
   switch (action.type) {
     case STUDENTS_FETCHED:
       return action.students;

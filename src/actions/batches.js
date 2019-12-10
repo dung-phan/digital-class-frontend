@@ -35,11 +35,10 @@ export const createBatch = batch => (dispatch, getState) => {
 };
 
 export const loadBatch = id => (dispatch, getState) => {
-  console.log("check getState", getState());
   const token = getState().auth;
 
   superagent(`${baseUrl}/batches/${id}`)
-    .set("Authorization", `Bearer ${token}`)
+    // .set("Authorization", `Bearer ${token}`)
     .then(response => dispatch(batchFetched(response.body)))
     .catch(console.error);
 };

@@ -123,125 +123,124 @@ class BatchDetails extends React.Component {
     return (
       <div>
         <NavBar />
-        {this.props.loggedIn ? (
-          <div>
-            <div className="top-heading" style={{ marginBottom: "30px" }}>
-              Class details
-              <img
-                src="http://embacy.io/images/E.svg"
-                alt=""
-                className="float-right"
-                style={{ transform: "translate(0px, 50px)" }}
-              />
-              <img
-                src="http://embacy.io/images/B.svg"
-                alt=""
-                className="float-right"
-                style={{ transform: "translate(0px, 30px)" }}
-              />
-            </div>
+        {/* {this.props.loggedIn ? ( */}
+        <div>
+          <div className="top-heading" style={{ marginBottom: "30px" }}>
+            Class details
+            <img
+              src="http://embacy.io/images/E.svg"
+              alt=""
+              className="float-right"
+              style={{ transform: "translate(0px, 50px)" }}
+            />
+            <img
+              src="http://embacy.io/images/B.svg"
+              alt=""
+              className="float-right"
+              style={{ transform: "translate(0px, 30px)" }}
+            />
+          </div>
 
-            <div
-              className="ui card"
-              style={{
-                width: "20%",
-                margin: "0 auto",
-                padding: "10px"
-              }}
-            >
-              <h4 className="center aligned">Class performance:</h4>
-              <Progress
-                percent={greenPercentage}
-                theme={{ active: { color: "green" } }}
-                style={{ width: 200 }}
-              />
+          <div
+            className="ui card"
+            style={{
+              width: "20%",
+              margin: "0 auto",
+              padding: "10px"
+            }}
+          >
+            <h4 className="center aligned">Class performance:</h4>
+            <Progress
+              percent={greenPercentage}
+              theme={{ active: { color: "green" } }}
+              style={{ width: 200 }}
+            />
 
-              <Progress
-                percent={redPercentage}
-                theme={{ active: { color: "red" } }}
-                style={{ width: 200 }}
-              />
-              <Progress
-                percent={yellowPercentage}
-                theme={{ active: { color: "#fbc630" } }}
-                style={{ width: 200 }}
-              />
-              <div className="ui card" style={{}}>
-                <div className="image">
-                  {this.state.studentphoto !== "" ? (
-                    <img src={this.state.studentphoto} alt="student" />
-                  ) : (
-                    <h4 className="center aligned">Ask a random student</h4>
-                  )}
-                </div>
-                <div className="content">
-                  <h3> {this.state.studentname}</h3>
-                </div>
-                <div className="extra content center aligned">
-                  <button
-                    onClick={this.chooseRandomStudent}
-                    className="ui basic button "
-                  >
-                    Click here
-                  </button>
-                </div>
+            <Progress
+              percent={redPercentage}
+              theme={{ active: { color: "red" } }}
+              style={{ width: 200 }}
+            />
+            <Progress
+              percent={yellowPercentage}
+              theme={{ active: { color: "#fbc630" } }}
+              style={{ width: 200 }}
+            />
+            <div className="ui card" style={{}}>
+              <div className="image">
+                {this.state.studentphoto !== "" ? (
+                  <img src={this.state.studentphoto} alt="student" />
+                ) : (
+                  <h4 className="center aligned">Ask a random student</h4>
+                )}
+              </div>
+              <div className="content">
+                <h3> {this.state.studentname}</h3>
+              </div>
+              <div className="extra content center aligned">
+                <button
+                  onClick={this.chooseRandomStudent}
+                  className="ui basic button "
+                >
+                  Click here
+                </button>
               </div>
             </div>
-
-            {!this.props.students ? (
-              "Loading..."
-            ) : (
-              <ul className="ui three column grid">
-                {this.props.students &&
-                  this.props.students.map(student => (
-                    <li
-                      key={student.id}
-                      className="ui card column"
-                      style={{
-                        marginLeft: "5%",
-                        marginRight: "5%",
-                        width: "20%",
-                        marginTop: "7%"
-                      }}
-                    >
-                      <div className="segment">
-                        <Link
-                          className="header"
-                          to={`/batches/${student.batchId}/students/${student.id}/evaluations`}
-                        >
-                          Student #{student.id}
-                        </Link>
-                      </div>
-                      <div className="content">
-                        <h4 className="ui sub header">Details</h4>
-                        <img
-                          src={student.photo}
-                          alt="student"
-                          className="ui image"
-                        />
-                        <br />
-                        <br />
-                        Name: {student.name}
-                        <br />
-                      </div>
-
-                      <button
-                        className="ui basic button"
-                        onClick={() => this.handleDelete(student.id)}
-                      >
-                        {" "}
-                        Delete{" "}
-                      </button>
-                    </li>
-                  ))}
-              </ul>
-            )}
-            <br />
-            <br />
-            <CreateNewStudent batchId={this.props.match.params.id} />
           </div>
-        ) : (
-          <Link to="/login">Please log in to see the class performance</Link>
+
+          {!this.props.students ? (
+            "Loading..."
+          ) : (
+            <ul className="ui three column grid">
+              {this.props.students &&
+                this.props.students.map(student => (
+                  <li
+                    key={student.id}
+                    className="ui card column"
+                    style={{
+                      marginLeft: "5%",
+                      marginRight: "5%",
+                      width: "20%",
+                      marginTop: "7%"
+                    }}
+                  >
+                    <div className="segment">
+                      <Link
+                        className="header"
+                        to={`/batches/${student.batchId}/students/${student.id}/evaluations`}
+                      >
+                        Student #{student.id}
+                      </Link>
+                    </div>
+                    <div className="content">
+                      <h4 className="ui sub header">Details</h4>
+                      <img
+                        src={student.photo}
+                        alt="student"
+                        className="ui image"
+                      />
+                      <br />
+                      <br />
+                      Name: {student.name}
+                      <br />
+                    </div>
+
+                    <button
+                      className="ui basic button"
+                      onClick={() => this.handleDelete(student.id)}
+                    >
+                      {" "}
+                      Delete{" "}
+                    </button>
+                  </li>
+                ))}
+            </ul>
+          )}
+          <br />
+          <br />
+          <CreateNewStudent batchId={this.props.match.params.id} />
+        </div>
+        ) : (<Link to="/login">Please log in to see the class performance</Link>
         )}
       </div>
     );
@@ -249,11 +248,10 @@ class BatchDetails extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("check state in mapStatetoprops", state);
   return {
     students: state.students,
-    evaluations: state.evaluations,
-    loggedIn: !!state.auth
+    evaluations: state.evaluations
+    // loggedIn: !!state.auth
   };
 };
 export default connect(mapStateToProps, {

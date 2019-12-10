@@ -6,7 +6,6 @@ import CreateNewBatch from "./CreateNewBatch";
 import NavBar from "./NavBar";
 export class Batch extends Component {
   componentDidMount() {
-    console.log("did component did mount works");
     this.props.loadBatches();
   }
   render() {

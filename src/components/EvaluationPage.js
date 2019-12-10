@@ -200,7 +200,6 @@ export class EvaluationPage extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log("check state in mapStatetoprops", state);
   return {
     student: state.student,
     grades: state.evaluations

@@ -41,21 +41,18 @@ export const addStudent = (batchId, student) => dispatch => {
   superagent
     .post(`${baseUrl}/batches/${batchId}/students`)
     // .set('Authorization', `Bearer ${getState().user}`)
-    .send(student) //send the event data to the server
-
+    .send(student)
     .then(res => dispatch(studentAdd(res.body)))
     .catch(console.error);
 };
 export const editStudent = (batchId, studentId, student) => dispatch => {
   superagent
     .put(`${baseUrl}/batches/${batchId}/students/${studentId}`)
-    .send(student) //send the event data to the server
-    .then(() => console.log("Check what i sent", student))
+    .send(student)
     .then(() => dispatch(studentEdit(student)))
     .catch(console.error);
 };
 export const deleteStudent = (batchId, id) => dispatch => {
-  console.log("what is id", batchId, id);
   superagent
     .del(`${baseUrl}/batches/${batchId}/students/${id}`)
     .then(() => dispatch(studentDelete(id)))
