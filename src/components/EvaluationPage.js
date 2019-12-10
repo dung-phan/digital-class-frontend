@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import { loadStudent, editStudent } from "../actions/students";
 import { evaluateStudent, addEvaluation } from "../actions/evaluations";
 import StudentForm from "./StudentForm";
-//import { Link } from 'react-router-dom';
 import NavBar from "./NavBar";
 export class EvaluationPage extends Component {
   state = {
     studentId: this.props.match.params.studentId,
+    batchId: this.props.match.params.batchId,
     color: "",
     date: "",
     remark: "",
@@ -37,7 +37,7 @@ export class EvaluationPage extends Component {
       editMode: false
     });
     this.props.editStudent(
-      this.props.match.params.batchId,
+      this.state.batchId,
       this.state.studentId,
       this.state.formValues
     );
@@ -47,8 +47,7 @@ export class EvaluationPage extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    const { studentId, color, date, remark } = this.state;
-    const batchId = this.props.match.params.batchId;
+    const { batchId, studentId, color, date, remark } = this.state;
     this.props.addEvaluation(batchId, studentId, color, date, remark);
     this.setState({
       color: "",
@@ -69,14 +68,8 @@ export class EvaluationPage extends Component {
     }
   };
   componentDidMount() {
-    this.props.loadStudent(
-      this.props.match.params.batchId,
-      this.props.match.params.studentId
-    );
-    this.props.evaluateStudent(
-      this.props.match.params.batchId,
-      this.props.match.params.studentId
-    );
+    this.props.loadStudent(this.state.batchId, this.state.studentId);
+    this.props.evaluateStudent(this.state.batchId, this.state.studentId);
   }
   render() {
     return (
@@ -115,7 +108,10 @@ export class EvaluationPage extends Component {
                 <p>Latest grade:</p>
                 <ul>
                   {this.props.grades.map(grade => (
-                    <i className={grade.color + " large square full icon"}></i>
+                    <i
+                      key={grade.id}
+                      className={grade.color + " large square full icon"}
+                    ></i>
                   ))}
                 </ul>
               </div>
@@ -194,11 +190,6 @@ export class EvaluationPage extends Component {
                     </label>
                   </div>
                   <input type="submit" value="Save" className="ui button" />
-                  <input
-                    type="submit"
-                    value="Save and next"
-                    className="ui button"
-                  />
                 </div>
               </form>
             </div>
