@@ -2,75 +2,38 @@
 
 # DIGITAL CLASS
 
-## [🐕🐩 Check out the deployed version here! 🐩🐕](https://dog-quiz.netlify.com)
+## [ Check out the deployed version here! ](https://dog-quiz.netlify.com)
 
 ## What this project is about
 
-This is my own attempt at the week 4 React/Redux group project the students do during the Academy. For more info why I am doing this checkout: **[Goals for this project](#goals-for-this-project)**
+This is my own attempt during 4 days to build a full stack React app for the final test at the Academy.
 
 ## Table of contents:
 
 - **[Technologies used](#technologies-used)**
-- **[Goals for this project](#goals-for-this-project)**
-- **[Requirements briefing](#requirements)**
-- **[Features built so far overview with pull requests](#features-built-so-far-overview-with-pull-requests)**
-- **[My git workflow](#my-git-workflow)**
-- **[My agile workflow and trello board](#my-agile-workflow-and-trello-board)**
+- **[Features](#features)**
 - **[create-react-app-docs](#create-react-app)**
 
 ## Technologies used
 
 #### 👀👇 Click links to view some samples in this project 👇👀
 
-- **[react](./src/containers/Game.js)**
-- **[redux](./src/reducers/question.js)**
-- **[redux-thunk](./src/actions/api.js)**
-- **[jest](./src/tests/questionReducer.test.js)**
+- **[react](./src/components/EvaluationPage.js)**
+- **[redux](./src/reducers/evaluations.js)**
+- **[redux-thunk](./src/actions/students.js)**
 
-## Goals for this project:
+## Features
 
-- To practice for myself
-- To make an example for the students to see how they could have tackled the project.
-- **[To showcase disciplined git usage](#my-git-workflow)**
+As a teacher:
 
-## Requirements
-
-Checkout out: **[requirements.md](./requirements.md)**
-
-## Features built so far overview with pull requests
-
-#### 👀👇 Click links to view the pull requests 👇👀
-
-- **[Feat/display random dog image](https://github.com/Reinoptland/dog-quiz/pull/2)**
-- **[Feat/next question](https://github.com/Reinoptland/dog-quiz/pull/5)**
-- **[Feat/feedback on incorrect](https://github.com/Reinoptland/dog-quiz/pull/7)**
-- **[Bugfix/disable buttons on choice](https://github.com/Reinoptland/dog-quiz/pull/11)**
-
-## My git workflow
-
-In this project I try to use:
-
-- Good commit messages
-- Well named branches
-- Pull requests with summaries
-
-If you have feedback to improve my git usage: **[please drop me a line!](https://www.linkedin.com/in/rein-op-t-land-295759124/)**
-
-Here is my branching model for this project.
-
-```
-master (auto deploys) ______________________
-                       \               /
-development             \_____________/- pull request
-                         \           /
-feature/some-feature      \_commits_/- pull request
-```
-
-## My agile workflow and Trello board
-
-I try to maintain a backlog eventhough I'm working on a project by myself. That way people can quickly jump in and start helping out. It also displays how I split up my tasks and try to build this project in an iterative and incremental way!
-
-**[Check out my trelloboard here](https://trello.com/b/3gqJHfb6/dog-quiz)**
+- You can sign up with your email and password
+- After signing in, you can see a list of classes, identified with class number, start date and end date (ie: Class #1)
+- You can create a new class
+- You can add, edit and remove students in a class
+- When clicking on a class, you can see a list of students and the progress of that class (based on their last performance)
+- For each student, you can add evaluations to their performace of the tests, with RED equal to FAILED, YELLOW equal to PASSES, and GREEN equal to GOOD JOB.
+- You can only fill in one evaluation per day.
+- YOu can choose to ask students questions, based on an algorithm calculation (based on their latest performance): students with RED will have 50% of chances, while those with YELLOW and GREEN card will get 33% and 17% respectively.
 
 ## Create React App
 
