@@ -4,7 +4,7 @@
 
 ## What this project is about
 
-This is my own attempt during 4 days to build a full stack React app.
+This is my own attempt to build a full stack React app for 4 days.
 
 ## Table of contents:
 
@@ -19,6 +19,7 @@ This is my own attempt during 4 days to build a full stack React app.
 - **[react](./src/components/EvaluationPage.js)**
 - **[redux](./src/reducers/evaluations.js)**
 - **[redux-thunk](./src/actions/students.js)**
+- **[Semantic UI](./src/components/SignUp.js)**
 
 ## Features
 
