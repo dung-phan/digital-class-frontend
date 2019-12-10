@@ -4,7 +4,7 @@
 
 ## What this project is about
 
-This is my own attempt during 4 days to build a full stack React app for the final test at the Academy.
+This is my own attempt during 4 days to build a full stack React app.
 
 ## Table of contents:
 
