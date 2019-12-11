@@ -5,7 +5,8 @@
 ## What this project is about
 
 This is my own attempt to build a full stack React app for 4 days.
-Note: For the purpose of demonstration, the authentication and validation from users have been removed (codes been commented out)
+
+Note: For the purpose of demonstration, the authentication and validation from users have been removed (codes can be found in the repo but not implemented )
 
 ## Table of contents:
 
