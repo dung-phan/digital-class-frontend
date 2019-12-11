@@ -11,7 +11,7 @@ Note: For the purpose of demonstration, the authentication and validation from u
 
 - **[Technologies used](#technologies-used)**
 - **[Features](#features)**
-- **[create-react-app-docs](#create-react-app)**
+- **[Installation](#installation)**
 
 ## Technologies used
 
@@ -35,8 +35,19 @@ As a teacher:
 - You can only fill in one evaluation per day.
 - YOu can choose to ask students questions, based on an algorithm calculation (based on their latest performance): students with RED will have 50% of chances, while those with YELLOW and GREEN card will get 33% and 17% respectively.
 
-## Create React App
+# Installation
 
-This project was scaffolded using the create-react-app cli.
+1. First, make sure to set up the backend [Server](https://github.com/dung-phan/digital-class-server)
 
-**[The standard create-react-app docs can be found in here](./create-react-app-docs.md)**
+2. Git clone the [Front-end](https://github.com/dung-phan/digital-class-frontend)
+   ```
+   $ git clone
+   $ cd ./digital-class-frontend
+   $ npm install
+   ```
+3. Go to _constants.js_ and change the url to your local server.
+
+4. Run the app:
+   ```
+   $ npm run start
+   ```

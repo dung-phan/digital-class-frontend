@@ -240,7 +240,7 @@ class BatchDetails extends React.Component {
           <br />
           <CreateNewStudent batchId={this.props.match.params.id} />
         </div>
-        ) : (<Link to="/login">Please log in to see the class performance</Link>
+        {/* ) : (<Link to="/login">Please log in to see the class performance</Link> */}
         )}
       </div>
     );
