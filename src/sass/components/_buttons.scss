@@ -1,0 +1,32 @@
+.btn:link,
+.btn:visited {
+  display: inline-block;
+}
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+.btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.btn-main {
+  background-color: transparent;
+  padding: 1.5rem 4rem;
+  border: 1px solid $primary-color;
+  border-radius: 100px;
+  transition: all 0.2s;
+  float: right;
+  margin: 0 0.6rem;
+  outline: none;
+}
+.btn-sub {
+  background-color: transparent;
+  padding: 1.5rem 4rem;
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 100px;
+  transition: all 0.2s;
+  float: right;
+  margin: 0 0.6rem;
+  outline: none;
+}

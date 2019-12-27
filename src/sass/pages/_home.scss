@@ -1,0 +1,38 @@
+.section-home {
+  padding: 10rem 15rem;
+  height: 100vh;
+  background: linear-gradient(to right, rgba(109, 104, 206, 0.932), #fad693);
+  width: 100%;
+}
+.frame {
+  @include absoluteCenter;
+  background-color: white;
+  opacity: 0.8;
+  height: 55rem;
+  border-radius: 20px;
+  display: table;
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
+  width: 75%;
+  &__left {
+    width: 30%;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 1rem 5rem;
+  }
+
+  &__right {
+    width: 70%;
+    display: table-cell;
+    padding: 1rem 1rem;
+    vertical-align: middle;
+
+    &--box {
+      background-image: url(https://cdn.dribbble.com/users/1248571/screenshots/6652149/__.png);
+      background-size: 135%;
+      background-position: center;
+      height: 55rem;
+      border-radius: 20px;
+      opacity: 0.9;
+    }
+  }
+}

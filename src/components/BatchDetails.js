@@ -121,26 +121,148 @@ class BatchDetails extends React.Component {
     const yellowPercentage = this.showPercentage("yellow");
     const redPercentage = this.showPercentage("red");
     return (
-      <div>
-        <NavBar />
-        {/* {this.props.loggedIn ? ( */}
-        <div>
-          <div className="top-heading" style={{ marginBottom: "30px" }}>
-            Class details
-            <img
-              src="http://embacy.io/images/E.svg"
-              alt=""
-              className="float-right"
-              style={{ transform: "translate(0px, 50px)" }}
-            />
-            <img
-              src="http://embacy.io/images/B.svg"
-              alt=""
-              className="float-right"
-              style={{ transform: "translate(0px, 30px)" }}
-            />
-          </div>
+      <div className="section-single">
+        <div className="row">
+          <div className="frame-single">
+            <div className="frame-single__sub">
+              <Link className="nav-item" to="/">
+                <i className="icon ion-ios-home nav-item-icon"></i>
+              </Link>
+              <Link className="nav-item" to="/batches">
+                <i className="icon ion-ios-list nav-item-icon"></i>
+              </Link>
+              <Link className="nav-item" to="/account">
+                <i className="icon ion-ios-person nav-item-icon"></i>
+              </Link>
+            </div>
+            <div className="frame-single__main">
+              <div className="section-top">
+                <div className="col-1-of-3">
+                  <h1>Class overview </h1>
+                </div>
+                <div className="col-2-of-3">
+                  <div className="col-1-of-3">
+                    <button className="btn btn-sub">
+                      <h4>
+                        <b>&#43;</b> Add student
+                      </h4>
+                    </button>
+                  </div>
 
+                  <div className="col-1-of-3">
+                    <button className="btn btn-sub">
+                      <h4>
+                        <b>&#63;</b> Ask a student
+                      </h4>
+                    </button>
+                  </div>
+                  <div className="col-1-of-3">
+                    <div className="search-box">
+                      <input
+                        type="text"
+                        name=""
+                        className="search-txt"
+                        placeholder="Search student number..."
+                      />
+                      <a className="search-btn">
+                        <i className="icon ion-ios-search"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="section-mainbody">
+                {!this.props.students ? (
+                  <h1>Loading...</h1>
+                ) : (
+                  <ul style={{ listStyle: "none" }}>
+                    {this.props.students &&
+                      this.props.students.map(student => (
+                        <li key={student.id} className="col-1-of-3">
+                          <div className="student-card">
+                            <div className="col-1-of-2">
+                              <Link
+                                to={`/batches/${student.batchId}/students/${student.id}/evaluations`}
+                              >
+                                <img
+                                  src={student.photo}
+                                  alt="student"
+                                  className="image"
+                                />
+                              </Link>
+                            </div>
+                            <div className="col-1-of-2">
+                              <li>
+                                <h4>
+                                  <b>{student.name}</b>
+                                </h4>
+                              </li>
+                              <li>
+                                <h5>ID: {student.id}</h5>
+                              </li>
+                              <li>
+                                <h5>
+                                  <i
+                                    className="icon ion-ios-trash"
+                                    style={{
+                                      float: "none",
+                                      paddingTop: "1rem",
+                                      fontSize: "2.3rem"
+                                    }}
+                                  ></i>
+                                  Delete
+                                </h5>
+                              </li>
+                              <li>
+                                <h5>
+                                  <i
+                                    className="icon ion-ios-settings"
+                                    style={{
+                                      float: "none",
+                                      paddingTop: "1rem",
+                                      fontSize: "2.3rem"
+                                    }}
+                                  ></i>
+                                  Edit
+                                </h5>
+                              </li>
+                            </div>
+
+                            {/* <button
+                              className="btn btn-main"
+                              onClick={() => this.handleDelete(student.id)}
+                            >
+                              Delete
+                            </button> */}
+                          </div>
+                        </li>
+                      ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    students: state.students,
+    evaluations: state.evaluations
+    // loggedIn: !!state.auth
+  };
+};
+export default connect(mapStateToProps, {
+  loadStudents,
+  deleteStudent,
+  loadEvaluations
+})(BatchDetails);
+
+{
+  /* <div>
           <div
             className="ui card"
             style={{
@@ -188,74 +310,11 @@ class BatchDetails extends React.Component {
             </div>
           </div>
 
-          {!this.props.students ? (
-            "Loading..."
-          ) : (
-            <ul className="ui three column grid">
-              {this.props.students &&
-                this.props.students.map(student => (
-                  <li
-                    key={student.id}
-                    className="ui card column"
-                    style={{
-                      marginLeft: "5%",
-                      marginRight: "5%",
-                      width: "20%",
-                      marginTop: "7%"
-                    }}
-                  >
-                    <div className="segment">
-                      <Link
-                        className="header"
-                        to={`/batches/${student.batchId}/students/${student.id}/evaluations`}
-                      >
-                        Student #{student.id}
-                      </Link>
-                    </div>
-                    <div className="content">
-                      <h4 className="ui sub header">Details</h4>
-                      <img
-                        src={student.photo}
-                        alt="student"
-                        className="ui image"
-                      />
-                      <br />
-                      <br />
-                      Name: {student.name}
-                      <br />
-                    </div>
-
-                    <button
-                      className="ui basic button"
-                      onClick={() => this.handleDelete(student.id)}
-                    >
-                      {" "}
-                      Delete{" "}
-                    </button>
-                  </li>
-                ))}
-            </ul>
+          
           )}
           <br />
           <br />
           <CreateNewStudent batchId={this.props.match.params.id} />
         </div>
-        {/* ) : (<Link to="/login">Please log in to see the class performance</Link> */}
-        )}
-      </div>
-    );
-  }
+        {/* ) : (<Link to="/login">Please log in to see the class performance</Link> */
 }
-
-const mapStateToProps = state => {
-  return {
-    students: state.students,
-    evaluations: state.evaluations
-    // loggedIn: !!state.auth
-  };
-};
-export default connect(mapStateToProps, {
-  loadStudents,
-  deleteStudent,
-  loadEvaluations
-})(BatchDetails);

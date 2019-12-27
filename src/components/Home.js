@@ -1,21 +1,22 @@
 import React, { Component } from "react";
-import "./Home.css";
-import NavBar from "./NavBar";
+import NarBar from "./NavBar";
 export default class Home extends Component {
   render() {
     return (
-      <div>
-        <NavBar />
-        <div className="float-left heading">Digital class</div>
-        <img
-          style={{ transform: "translate(0px, 50px)" }}
-          src="http://embacy.io/images/03-il.svg"
-          className="float-right"
-          alt=""
-        />
-        <h2 className="float-left subheading">
-          An effective way for teachers to evaluate students
-        </h2>
+      <div className="section-home">
+        <div className="row">
+          <div className="frame">
+            <div className="frame__left">
+              <h1 className="">Digital class</h1>
+              <h4>A time-saving evaluation tool designed for teachers</h4>
+            </div>
+            <div className="frame__right">
+              <NarBar />
+
+              <div className="frame__right--box"></div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
