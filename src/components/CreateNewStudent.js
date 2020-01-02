@@ -8,13 +8,11 @@ class CreateNewStudent extends Component {
     photo: ""
   };
   handleChange = event => {
-    //hey it's gotta be arrow function here
-    this.setState({ [event.target.name]: event.target.value }); //use event.target.name as an attribute so you can reuse it multiple times
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-
     this.setState({
       name: "",
       photo: ""

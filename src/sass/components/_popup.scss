@@ -1,0 +1,49 @@
+.modal {
+  position: fixed;
+  z-index: 1;
+  width: 60%;
+  height: 90%;
+}
+
+.modal_content {
+  background-color: $primary-color;
+  position: absolute;
+  top: 10%;
+  right: 40%;
+  width: 70%;
+  padding: 3rem;
+  border-radius: 5px;
+  border: 2px solid rgb(73, 73, 73);
+  text-align: center;
+}
+.modal-form {
+  position: fixed;
+  z-index: 1;
+  width: 60%;
+  height: 90%;
+
+  &__content {
+    background-color: $primary-color;
+    position: absolute;
+    top: 10%;
+    right: 40%;
+    width: 70%;
+    padding: 3rem;
+    border-radius: 5px;
+    border: 2px solid rgb(73, 73, 73);
+    text-align: center;
+  }
+}
+.close {
+  color: Black;
+  float: right;
+}
+
+.close:hover {
+  color: cyan;
+  cursor: pointer;
+}
+input {
+  font-size: 1.9rem;
+  color: rgb(29, 29, 29);
+}

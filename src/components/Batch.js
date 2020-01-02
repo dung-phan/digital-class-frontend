@@ -3,27 +3,34 @@ import { loadBatches } from "../actions/batches";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import CreateNewBatch from "./CreateNewBatch";
+import LogInNotice from "./LogInNotice";
+import SideBar from "./SideBar";
 export class Batch extends Component {
+  state = {
+    seen: false,
+    login: false
+  };
   componentDidMount() {
     this.props.loadBatches();
   }
+
+  handleAddClassPopUp = () => {
+    if (this.props.loggedIn) {
+      this.setState({
+        seen: !this.state.seen
+      });
+    }
+    this.setState({
+      login: !this.state.login
+    });
+  };
   render() {
     return (
       <div>
         <div className="section-batch">
           <div className="row">
             <div className="frame">
-              <div className="frame__sub">
-                <Link className="nav-item" to="/">
-                  <i className="icon ion-ios-home nav-item-icon"></i>
-                </Link>
-                <Link className="nav-item" to="/batches">
-                  <i className="icon ion-ios-list nav-item-icon"></i>
-                </Link>
-                <Link className="nav-item" to="/account">
-                  <i className="icon ion-ios-person nav-item-icon"></i>
-                </Link>
-              </div>
+              <SideBar />
               <div className="frame__main">
                 <div className="section-head">
                   <div className="col-1-of-2">
@@ -31,11 +38,21 @@ export class Batch extends Component {
                   </div>
                   <div className="col-1-of-2">
                     <div className="col-1-of-2">
-                      <button className="btn btn-sub">
+                      <button
+                        className="btn btn-main"
+                        onClick={this.handleAddClassPopUp}
+                      >
                         <h4>
-                          <b> &#43;</b> Add class
+                          <b>&#43;</b> Add Class
                         </h4>
                       </button>
+                      {console.log("check login", this.state.login)}
+                      {this.state.seen ? (
+                        <CreateNewBatch toggle={this.handleAddClassPopUp} />
+                      ) : null}
+                      {this.state.login && !this.props.loggedIn ? (
+                        <LogInNotice toggle={this.handleAddClassPopUp} />
+                      ) : null}
                     </div>
                     <div className="col-1-of-2">
                       <div className="search-box">
@@ -43,7 +60,7 @@ export class Batch extends Component {
                           type="text"
                           name=""
                           className="search-txt"
-                          placeholder="Search class number..."
+                          placeholder="Type class number..."
                         />
                         <a className="search-btn">
                           <i className="icon ion-ios-search"></i>
@@ -53,8 +70,8 @@ export class Batch extends Component {
                   </div>
                 </div>
                 <div className="section-body">
-                  {this.props.batches === null ? (
-                    <h1>Loading...</h1>
+                  {!this.props.batches || this.props.batches.length === 0 ? (
+                    <h2>Please wait...</h2>
                   ) : (
                     <div>
                       {this.props.batches.map(batch => (
@@ -79,7 +96,7 @@ export class Batch extends Component {
                               <h5>End: {batch.endDate}</h5>
                             </div>
                             <div className="col-1-of-5">
-                              <h5 style={{ textAlign: "center" }}>Total: 22</h5>
+                              <h5 style={{ textAlign: "center" }}>Total: 20</h5>
                             </div>
                             <i className="icon ion-md-more"></i>
                           </div>
@@ -97,9 +114,10 @@ export class Batch extends Component {
   }
 }
 const mapStateToProps = state => {
+  console.log("what is state", state);
   return {
-    batches: state.batches
-    // loggedIn: !!state.auth
+    batches: state.batches,
+    loggedIn: !!state.auth
   };
 };
 export default connect(mapStateToProps, { loadBatches })(Batch);
