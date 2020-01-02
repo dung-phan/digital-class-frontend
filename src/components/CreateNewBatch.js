@@ -27,58 +27,44 @@ class CreateNewBatch extends Component {
 
   render() {
     return (
-      <div className="modal">
-        <div className="modal_content">
+      <div className="modal-form">
+        <div className="modal-form__content">
           <span className="close" onClick={this.handleClick}>
             &times;
           </span>
-          <div className="ui middle aligned center aligned grid">
-            <div
-              className="column form"
-              style={{ maxWidth: 300, marginBottom: "15px" }}
-            >
-              <form
-                onSubmit={this.handleSubmit}
-                className="ui large form three fields"
-              >
-                <div className="ui stacked segment">
-                  <div className="ui field">
-                    <label>
-                      Batch Number
-                      <input
-                        type="text"
-                        name="batchNumber"
-                        value={this.state.name}
-                        onChange={this.handleChange}
-                      />
-                    </label>
-                  </div>
-                  <div className="field">
-                    <label>
-                      Start Date:
-                      <input
-                        type="date"
-                        name="startDate"
-                        value={this.state.startDate}
-                        onChange={this.handleChange}
-                      />
-                    </label>
-                  </div>
-                  <div className="field">
-                    <label>
-                      End Date:
-                      <input
-                        type="date"
-                        name="endDate"
-                        value={this.state.endDate}
-                        onChange={this.handleChange}
-                      />
-                    </label>
-                  </div>
-                  <input type="submit" value="Submit" className="ui button" />
-                </div>
-              </form>
-            </div>
+          <div className="">
+            <form onSubmit={this.handleSubmit}>
+              <label>
+                <p>Batch Number</p>
+                <input
+                  type="text"
+                  name="batchNumber"
+                  value={this.state.name}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <div className="field">
+                <label>
+                  <p>Start Date:</p>
+                  <input
+                    type="date"
+                    name="startDate"
+                    value={this.state.startDate}
+                    onChange={this.handleChange}
+                  />
+                </label>
+                <label>
+                  <p>End Date:</p>
+                  <input
+                    type="date"
+                    name="endDate"
+                    value={this.state.endDate}
+                    onChange={this.handleChange}
+                  />
+                </label>
+                <input type="submit" value="Submit" className="btn btn-sub" />
+              </div>
+            </form>
           </div>
         </div>
       </div>

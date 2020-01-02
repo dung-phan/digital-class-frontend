@@ -50,7 +50,7 @@ export class Batch extends Component {
                       {this.state.seen ? (
                         <CreateNewBatch toggle={this.handleAddClassPopUp} />
                       ) : null}
-                      {this.state.login ? (
+                      {this.state.login && !this.props.loggedIn ? (
                         <LogInNotice toggle={this.handleAddClassPopUp} />
                       ) : null}
                     </div>
@@ -96,9 +96,7 @@ export class Batch extends Component {
                               <h5>End: {batch.endDate}</h5>
                             </div>
                             <div className="col-1-of-5">
-                              <h5 style={{ textAlign: "center" }}>
-                                Total: {this.props.batches.length}
-                              </h5>
+                              <h5 style={{ textAlign: "center" }}>Total: 20</h5>
                             </div>
                             <i className="icon ion-md-more"></i>
                           </div>
