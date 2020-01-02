@@ -28,17 +28,14 @@ export const createBatch = batch => (dispatch, getState) => {
   const token = getState().auth;
   superagent
     .post(`${baseUrl}/batches`)
-    // .set('Authorization', `Bearer ${token}`)
-    .send(batch) //send the event data to the server
+    .set("Authorization", `Bearer ${token}`)
+    .send(batch)
     .then(response => dispatch(batchCreate(response.body)))
     .catch(console.error);
 };
 
-export const loadBatch = id => (dispatch, getState) => {
-  const token = getState().auth;
-
+export const loadBatch = id => dispatch => {
   superagent(`${baseUrl}/batches/${id}`)
-    // .set("Authorization", `Bearer ${token}`)
     .then(response => dispatch(batchFetched(response.body)))
     .catch(console.error);
 };

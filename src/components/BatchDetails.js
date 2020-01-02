@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { loadStudents, deleteStudent } from "../actions/students";
 import { loadEvaluations } from "../actions/evaluations";
 import CreateNewStudent from "../components/CreateNewStudent";
-import NavBar from "./NavBar";
+import SideBar from "./SideBar";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 import { Progress } from "react-sweet-progress";
@@ -124,17 +124,7 @@ class BatchDetails extends React.Component {
       <div className="section-single">
         <div className="row">
           <div className="frame-single">
-            <div className="frame-single__sub">
-              <Link className="nav-item" to="/">
-                <i className="icon ion-ios-home nav-item-icon"></i>
-              </Link>
-              <Link className="nav-item" to="/batches">
-                <i className="icon ion-ios-list nav-item-icon"></i>
-              </Link>
-              <Link className="nav-item" to="/account">
-                <i className="icon ion-ios-person nav-item-icon"></i>
-              </Link>
-            </div>
+          <SideBar />
             <div className="frame-single__main">
               <div className="section-top">
                 <div className="col-1-of-3">
@@ -162,7 +152,7 @@ class BatchDetails extends React.Component {
                         type="text"
                         name=""
                         className="search-txt"
-                        placeholder="Search student number..."
+                        placeholder="Type student ID"
                       />
                       <a className="search-btn">
                         <i className="icon ion-ios-search"></i>

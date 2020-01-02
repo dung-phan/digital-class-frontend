@@ -9,71 +9,76 @@ class CreateNewBatch extends Component {
     endDate: ""
   };
   handleChange = event => {
-    //hey it's gotta be arrow function here
-    this.setState({ [event.target.name]: event.target.value }); //use event.target.name as an attribute so you can reuse it multiple times
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-
     this.props.createBatch(this.state);
-    //set the form field to be empty again
     this.setState({
       batchNumber: "",
       startDate: "",
       endDate: ""
     });
   };
+  handleClick = () => {
+    this.props.toggle();
+  };
+
   render() {
     return (
-      <div>
-        <h2>Want to create a new batch?</h2>
-        <div className="ui middle aligned center aligned grid">
-          <div
-            className="column form"
-            style={{ maxWidth: 300, marginBottom: "15px" }}
-          >
-            <form
-              onSubmit={this.handleSubmit}
-              className="ui large form three fields"
+      <div className="modal">
+        <div className="modal_content">
+          <span className="close" onClick={this.handleClick}>
+            &times;
+          </span>
+          <div className="ui middle aligned center aligned grid">
+            <div
+              className="column form"
+              style={{ maxWidth: 300, marginBottom: "15px" }}
             >
-              <div className="ui stacked segment">
-                <div className="ui field">
-                  <label>
-                    Batch Number
-                    <input
-                      type="text"
-                      name="batchNumber"
-                      value={this.state.name}
-                      onChange={this.handleChange}
-                    />
-                  </label>
+              <form
+                onSubmit={this.handleSubmit}
+                className="ui large form three fields"
+              >
+                <div className="ui stacked segment">
+                  <div className="ui field">
+                    <label>
+                      Batch Number
+                      <input
+                        type="text"
+                        name="batchNumber"
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                      />
+                    </label>
+                  </div>
+                  <div className="field">
+                    <label>
+                      Start Date:
+                      <input
+                        type="date"
+                        name="startDate"
+                        value={this.state.startDate}
+                        onChange={this.handleChange}
+                      />
+                    </label>
+                  </div>
+                  <div className="field">
+                    <label>
+                      End Date:
+                      <input
+                        type="date"
+                        name="endDate"
+                        value={this.state.endDate}
+                        onChange={this.handleChange}
+                      />
+                    </label>
+                  </div>
+                  <input type="submit" value="Submit" className="ui button" />
                 </div>
-                <div className="field">
-                  <label>
-                    Start Date:
-                    <input
-                      type="date"
-                      name="startDate"
-                      value={this.state.startDate}
-                      onChange={this.handleChange}
-                    />
-                  </label>
-                </div>
-                <div className="field">
-                  <label>
-                    End Date:
-                    <input
-                      type="date"
-                      name="endDate"
-                      value={this.state.endDate}
-                      onChange={this.handleChange}
-                    />
-                  </label>
-                </div>
-                <input type="submit" value="Submit" className="ui button" />
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>

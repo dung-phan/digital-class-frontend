@@ -22,7 +22,7 @@ class Account extends Component {
   };
   handleSubmitSignUp = event => {
     event.preventDefault();
-    this.props.signup(this.state.name, this.state.email, this.state.password);
+    this.props.signup(this.state.email, this.state.password);
     this.setState({
       email: "",
       password: "",
