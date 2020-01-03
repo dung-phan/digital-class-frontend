@@ -10,13 +10,11 @@ class CreateNewBatch extends Component {
   };
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-    console.log("Check state", this.state);
   };
 
   handleSubmit = event => {
     event.preventDefault();
     this.props.createBatch(this.state);
-    console.log("Check state", this.state);
 
     this.setState({
       batchNumber: "",

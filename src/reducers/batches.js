@@ -11,8 +11,6 @@ export default (state = [], action = {}) => {
     case BATCH_CREATED:
       return [...state, action.batch];
     case BATCH_DELETED:
-      console.log("check action", action);
-      console.log("check state", state);
       return state.filter(batch => batch.id !== action.batchId);
     default:
       return state;

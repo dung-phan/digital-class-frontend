@@ -101,6 +101,9 @@ export class Batch extends Component {
                                   Total: 20
                                 </h5>
                               </div>
+                              <span>
+                                <i className="icon ion-md-more"></i>
+                              </span>
                               <span
                                 onClick={() => this.props.deleteBatch(batch.id)}
                               >
