@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { loadBatches } from "../actions/batches";
+import { loadBatches, deleteBatch } from "../actions/batches";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import CreateNewBatch from "./CreateNewBatch";
@@ -24,6 +24,7 @@ export class Batch extends Component {
       login: !this.state.login
     });
   };
+
   render() {
     return (
       <div>
@@ -46,7 +47,6 @@ export class Batch extends Component {
                           <b>&#43;</b> Add Class
                         </h4>
                       </button>
-                      {console.log("check login", this.state.login)}
                       {this.state.seen ? (
                         <CreateNewBatch toggle={this.handleAddClassPopUp} />
                       ) : null}
@@ -74,34 +74,41 @@ export class Batch extends Component {
                     <h2>Please wait...</h2>
                   ) : (
                     <div>
-                      {this.props.batches.map(batch => (
-                        <li
-                          style={{ listStyle: "none" }}
-                          key={batch.id}
-                          className="col-1-of-2"
-                        >
-                          <div className="card">
-                            <div className="col-1-of-5">
-                              <h3 style={{ textAlign: "center" }}>
-                                <Link
-                                  className="batch-link"
-                                  to={`/batches/${batch.id}/students`}
-                                >
-                                  Class {batch.batchNumber}
-                                </Link>
-                              </h3>
+                      {!this.state.editMode &&
+                        this.props.batches.map(batch => (
+                          <li
+                            style={{ listStyle: "none" }}
+                            key={batch.id}
+                            className="col-1-of-2"
+                          >
+                            <div className="card">
+                              <div className="col-1-of-5">
+                                <h3 style={{ textAlign: "center" }}>
+                                  <Link
+                                    className="batch-link"
+                                    to={`/batches/${batch.id}/students`}
+                                  >
+                                    Class {batch.batchNumber}
+                                  </Link>
+                                </h3>
+                              </div>
+                              <div className="col-2-of-5">
+                                <h5>Start: {batch.startDate}</h5>
+                                <h5>End: {batch.endDate}</h5>
+                              </div>
+                              <div className="col-1-of-5">
+                                <h5 style={{ textAlign: "center" }}>
+                                  Total: 20
+                                </h5>
+                              </div>
+                              <span
+                                onClick={() => this.props.deleteBatch(batch.id)}
+                              >
+                                <i className="icon ion-md-close"></i>
+                              </span>
                             </div>
-                            <div className="col-2-of-5">
-                              <h5>Start: {batch.startDate}</h5>
-                              <h5>End: {batch.endDate}</h5>
-                            </div>
-                            <div className="col-1-of-5">
-                              <h5 style={{ textAlign: "center" }}>Total: 20</h5>
-                            </div>
-                            <i className="icon ion-md-more"></i>
-                          </div>
-                        </li>
-                      ))}
+                          </li>
+                        ))}
                     </div>
                   )}
                 </div>
@@ -120,4 +127,4 @@ const mapStateToProps = state => {
     loggedIn: !!state.auth
   };
 };
-export default connect(mapStateToProps, { loadBatches })(Batch);
+export default connect(mapStateToProps, { loadBatches, deleteBatch })(Batch);
