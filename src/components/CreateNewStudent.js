@@ -20,46 +20,41 @@ class CreateNewStudent extends Component {
     const { batchId } = this.props;
     this.props.addStudent(batchId, this.state);
   };
+  handleToggle = () => {
+    this.props.toggle();
+  };
   render() {
     return (
       <div>
-        <h2>Want to add a new student?</h2>
-        <div className="ui middle aligned center aligned grid">
-          <div
-            className="column form"
-            style={{ maxWidth: 350, marginBottom: "15px" }}
-          >
-            <form
-              onSubmit={this.handleSubmit}
-              className="ui large form two fields"
-            >
-              <div className="ui stacked segment">
-                <div className="ui field">
-                  <label>
-                    Name:
-                    <input
-                      type="text"
-                      name="name"
-                      value={this.state.name}
-                      onChange={this.handleChange}
-                    />
-                  </label>
-                </div>
-                <div className="ui field">
-                  <label>
-                    Profile picture:
-                    <input
-                      type="text"
-                      name="photo"
-                      placeholder="Please provide a URL"
-                      value={this.state.photo}
-                      onChange={this.handleChange}
-                    />
-                  </label>
-                </div>
-                <input type="submit" value="Submit" className="ui button" />
-              </div>
-            </form>
+        <div className="modal-form">
+          <div className="modal-form__content">
+            <span className="close" onClick={this.handleToggle}>
+              &times;
+            </span>
+            <div>
+              <form onSubmit={this.handleSubmit}>
+                <label>
+                  <p>Name:</p>
+                  <input
+                    type="text"
+                    name="name"
+                    value={this.state.name}
+                    onChange={this.handleChange}
+                  />
+                </label>
+                <label>
+                  <p>Profile picture:</p>
+                  <input
+                    type="text"
+                    name="photo"
+                    placeholder="Please provide a URL"
+                    value={this.state.photo}
+                    onChange={this.handleChange}
+                  />
+                </label>
+                <input type="submit" value="Submit" className="btn btn-main" />
+              </form>
+            </div>
           </div>
         </div>
       </div>

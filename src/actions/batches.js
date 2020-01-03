@@ -57,11 +57,10 @@ export const editBatch = (batchId, batch) => (dispatch, getState) => {
     .catch(console.error);
 };
 export const deleteBatch = batchId => (dispatch, getState) => {
-  const token = getState().auth;
-  console.log("what is batchid", batchId);
+  //const token = getState().auth;
   superagent
     .del(`${baseUrl}/batches/${batchId}`)
-    .set("Authorization", `Bearer ${token}`)
+    //.set("Authorization", `Bearer ${token}`)
     .then(() => dispatch(batchDelete(batchId)))
     .catch(console.err);
 };

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { loadStudents, deleteStudent } from "../actions/students";
 import { loadEvaluations } from "../actions/evaluations";
 import CreateNewStudent from "../components/CreateNewStudent";
+import LogInNotice from "./LogInNotice";
 import SideBar from "./SideBar";
 import { Link } from "react-router-dom";
 import _ from "lodash";
@@ -10,8 +11,8 @@ import { Progress } from "react-sweet-progress";
 import "react-sweet-progress/lib/style.css";
 class BatchDetails extends React.Component {
   state = {
-    editMode: false,
-    studentId: Number(window.location.href.split("/").pop()),
+    seen: false,
+    login: false,
     studentname: "",
     studentphoto: ""
   };
@@ -21,15 +22,15 @@ class BatchDetails extends React.Component {
     this.props.loadStudents(this.props.match.params.id);
   }
 
-  //handle delete button
-  handleDelete = studentId => {
-    console.log(
-      "what is studentid and batchId",
-      studentId,
-      this.props.match.params.id
-    );
-    this.props.deleteStudent(this.props.match.params.id, studentId);
-    this.props.history.push(`/batches/${this.props.match.params.id}/students`);
+  handleAddStudent = () => {
+    if (this.props.loggedIn) {
+      this.setState({
+        seen: !this.state.seen
+      });
+    }
+    this.setState({
+      login: !this.state.login
+    });
   };
   //handle pick random student based on algorithm
   getLastEvaluation = () => {
@@ -124,7 +125,7 @@ class BatchDetails extends React.Component {
       <div className="section-single">
         <div className="row">
           <div className="frame-single">
-          <SideBar />
+            <SideBar />
             <div className="frame-single__main">
               <div className="section-top">
                 <div className="col-1-of-3">
@@ -132,7 +133,10 @@ class BatchDetails extends React.Component {
                 </div>
                 <div className="col-2-of-3">
                   <div className="col-1-of-3">
-                    <button className="btn btn-sub">
+                    <button
+                      className="btn btn-sub"
+                      onClick={this.handleAddStudent}
+                    >
                       <h4>
                         <b>&#43;</b> Add student
                       </h4>
@@ -145,6 +149,15 @@ class BatchDetails extends React.Component {
                         <b>&#63;</b> Ask a student
                       </h4>
                     </button>
+                    {this.state.seen ? (
+                      <CreateNewStudent
+                        batchId={this.props.match.params.id}
+                        toggle={this.handleAddStudent}
+                      />
+                    ) : null}
+                    {this.state.login && !this.props.loggedIn ? (
+                      <LogInNotice toggle={this.handleAddStudent} />
+                    ) : null}
                   </div>
                   <div className="col-1-of-3">
                     <div className="search-box">
@@ -162,8 +175,8 @@ class BatchDetails extends React.Component {
                 </div>
               </div>
               <div className="section-mainbody">
-                {!this.props.students ? (
-                  <h1>Loading...</h1>
+                {!this.props.students || this.props.students.length === 0 ? (
+                  <h4>Loading...</h4>
                 ) : (
                   <ul style={{ listStyle: "none" }}>
                     {this.props.students &&
@@ -182,48 +195,36 @@ class BatchDetails extends React.Component {
                               </Link>
                             </div>
                             <div className="col-1-of-2">
-                              <li>
+                              <div>
                                 <h4>
                                   <b>{student.name}</b>
                                 </h4>
-                              </li>
-                              <li>
+                              </div>
+                              <div>
                                 <h5>ID: {student.id}</h5>
-                              </li>
-                              <li>
+                              </div>
+                              <div>
+                                <span
+                                  onClick={() =>
+                                    this.props.deleteStudent(
+                                      this.props.match.params.id,
+                                      student.id
+                                    )
+                                  }
+                                >
+                                  <h5>
+                                    <i className="icon ion-ios-trash"></i>
+                                    Delete
+                                  </h5>
+                                </span>
+                              </div>
+                              <div>
                                 <h5>
-                                  <i
-                                    className="icon ion-ios-trash"
-                                    style={{
-                                      float: "none",
-                                      paddingTop: "1rem",
-                                      fontSize: "2.3rem"
-                                    }}
-                                  ></i>
-                                  Delete
-                                </h5>
-                              </li>
-                              <li>
-                                <h5>
-                                  <i
-                                    className="icon ion-ios-settings"
-                                    style={{
-                                      float: "none",
-                                      paddingTop: "1rem",
-                                      fontSize: "2.3rem"
-                                    }}
-                                  ></i>
+                                  <i className="icon ion-ios-settings"></i>
                                   Edit
                                 </h5>
-                              </li>
+                              </div>
                             </div>
-
-                            {/* <button
-                              className="btn btn-main"
-                              onClick={() => this.handleDelete(student.id)}
-                            >
-                              Delete
-                            </button> */}
                           </div>
                         </li>
                       ))}
@@ -241,8 +242,8 @@ class BatchDetails extends React.Component {
 const mapStateToProps = state => {
   return {
     students: state.students,
-    evaluations: state.evaluations
-    // loggedIn: !!state.auth
+    evaluations: state.evaluations,
+    loggedIn: !!state.auth
   };
 };
 export default connect(mapStateToProps, {
@@ -250,61 +251,3 @@ export default connect(mapStateToProps, {
   deleteStudent,
   loadEvaluations
 })(BatchDetails);
-
-{
-  /* <div>
-          <div
-            className="ui card"
-            style={{
-              width: "20%",
-              margin: "0 auto",
-              padding: "10px"
-            }}
-          >
-            <h4 className="center aligned">Class performance:</h4>
-            <Progress
-              percent={greenPercentage}
-              theme={{ active: { color: "green" } }}
-              style={{ width: 200 }}
-            />
-
-            <Progress
-              percent={redPercentage}
-              theme={{ active: { color: "red" } }}
-              style={{ width: 200 }}
-            />
-            <Progress
-              percent={yellowPercentage}
-              theme={{ active: { color: "#fbc630" } }}
-              style={{ width: 200 }}
-            />
-            <div className="ui card" style={{}}>
-              <div className="image">
-                {this.state.studentphoto !== "" ? (
-                  <img src={this.state.studentphoto} alt="student" />
-                ) : (
-                  <h4 className="center aligned">Ask a random student</h4>
-                )}
-              </div>
-              <div className="content">
-                <h3> {this.state.studentname}</h3>
-              </div>
-              <div className="extra content center aligned">
-                <button
-                  onClick={this.chooseRandomStudent}
-                  className="ui basic button "
-                >
-                  Click here
-                </button>
-              </div>
-            </div>
-          </div>
-
-          
-          )}
-          <br />
-          <br />
-          <CreateNewStudent batchId={this.props.match.params.id} />
-        </div>
-        {/* ) : (<Link to="/login">Please log in to see the class performance</Link> */
-}
