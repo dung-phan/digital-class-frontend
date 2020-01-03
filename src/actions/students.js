@@ -37,18 +37,18 @@ export const loadStudent = (batchId, studentId) => dispatch => {
     .then(response => dispatch(studentFetched(response.body)))
     .catch(console.error);
 };
-export const addStudent = (batchId, student) => dispatch => {
+export const addStudent = (batchId, student) => (dispatch, getState) => {
   superagent
     .post(`${baseUrl}/batches/${batchId}/students`)
-    // .set('Authorization', `Bearer ${getState().user}`)
-    .send(student)
+    .set("Authorization", `Bearer ${getState().user}`)
+    .send({ student })
     .then(res => dispatch(studentAdd(res.body)))
     .catch(console.error);
 };
 export const editStudent = (batchId, studentId, student) => dispatch => {
   superagent
     .put(`${baseUrl}/batches/${batchId}/students/${studentId}`)
-    .send(student)
+    .send({ student })
     .then(() => dispatch(studentEdit(student)))
     .catch(console.error);
 };

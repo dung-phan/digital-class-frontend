@@ -10,18 +10,21 @@ class CreateNewBatch extends Component {
   };
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
+    console.log("Check state", this.state);
   };
 
   handleSubmit = event => {
     event.preventDefault();
     this.props.createBatch(this.state);
+    console.log("Check state", this.state);
+
     this.setState({
       batchNumber: "",
       startDate: "",
       endDate: ""
     });
   };
-  handleClick = () => {
+  handleToggle = () => {
     this.props.toggle();
   };
 
@@ -29,7 +32,7 @@ class CreateNewBatch extends Component {
     return (
       <div className="modal-form">
         <div className="modal-form__content">
-          <span className="close" onClick={this.handleClick}>
+          <span className="close" onClick={this.handleToggle}>
             &times;
           </span>
           <div className="">
