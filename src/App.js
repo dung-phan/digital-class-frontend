@@ -6,7 +6,7 @@ import Home from "./components/Home";
 import Account from "./components/Account";
 import Batch from "./components/Batch";
 import BatchDetails from "./components/BatchDetails";
-import EvaluationPage from "./components/Account";
+import EvaluationPage from "./components/EvaluationPage";
 import "./sass/_main.scss";
 class App extends Component {
   render() {

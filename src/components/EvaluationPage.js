@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loadStudent, editStudent } from "../actions/students";
-import { evaluateStudent, addEvaluation } from "../actions/evaluations";
+import { evaluateStudent } from "../actions/evaluations";
 import StudentForm from "./StudentForm";
-import NavBar from "./NavBar";
+import CreateNewEvaluation from "./CreateNewEvaluation";
+import LogInNotice from "./LogInNotice";
+import SideBar from "./SideBar";
 export class EvaluationPage extends Component {
   state = {
     studentId: this.props.match.params.studentId,
     batchId: this.props.match.params.batchId,
-    color: "",
-    date: "",
-    remark: "",
-    editMode: false
+    editMode: false,
+    seen: false,
+    login: false
   };
   //handle edit button
   onEdit = () => {
@@ -42,156 +43,93 @@ export class EvaluationPage extends Component {
       this.state.formValues
     );
   };
-
-  //handle remarks
-  handleSubmit = event => {
-    event.preventDefault();
-
-    const { batchId, studentId, color, date, remark } = this.state;
-    this.props.addEvaluation(batchId, studentId, color, date, remark);
-    this.setState({
-      color: "",
-      date: "",
-      remark: ""
-    });
-  };
-
-  handleChange = event => {
-    const { name, value } = event.target;
-    const { grades } = this.props;
-    if (grades.find(grade => grade.date === value)) {
-      alert("Date already exists!");
-    } else {
+  handleAddEvaluation = () => {
+    if (this.props.loggedIn) {
       this.setState({
-        [name]: value
+        seen: !this.state.seen
       });
     }
+    this.setState({
+      login: !this.state.login
+    });
   };
   componentDidMount() {
     this.props.loadStudent(this.state.batchId, this.state.studentId);
     this.props.evaluateStudent(this.state.batchId, this.state.studentId);
   }
+
   render() {
     return (
       <div>
-        <NavBar />
-        {this.state.editMode && (
-          <StudentForm
-            onSubmit={this.onSubmit}
-            onChange={this.onChange}
-            values={this.state.formValues}
-          />
-        )}
-        {!this.state.editMode && (
-          <div
-            className="ui card"
-            style={{
-              maxWidth: "250px",
-              marginTop: "8%",
-              transform: "translate(200px, 10px)"
-            }}
-          >
-            <div className="ui image">
-              <img
-                src={this.props.student.photo}
-                alt="student"
-                id="image-eva"
-              />
-            </div>
-            <div className="content">
-              <a className="header">
-                {" "}
-                <p>Name: {this.props.student.name}</p>{" "}
-              </a>
-              <div className="meta">
-                <span> Class #{this.props.student.batchId}</span>
-                <p>Latest grade:</p>
-                <ul>
-                  {this.props.grades.map(grade => (
-                    <i
-                      key={grade.id}
-                      className={grade.color + " large square full icon"}
-                    ></i>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="ui bottom attached button">
-              <button onClick={this.onEdit} className="ui basic button">
-                Edit{" "}
-              </button>
-            </div>
-          </div>
-        )}
-        <div style={{ transform: "translate(200px, -500px)" }}>
-          <h2>Submit your evaluation</h2>
-          <div className="ui middle aligned center aligned grid">
-            <div
-              className="column form"
-              style={{ maxWidth: 500, marginBottom: "15px" }}
-            >
-              <form
-                onSubmit={this.handleSubmit}
-                className="ui large form three fields"
-              >
-                <div className="ui stacked segment">
-                  <label>
-                    <input
-                      type="radio"
-                      name="color"
-                      value="red"
-                      checked={this.state.color === "red"}
-                      onChange={this.handleChange}
-                    />{" "}
-                    {""}
-                    <i className="red large square full icon"></i>
-                  </label>{" "}
-                  <label>
-                    <input
-                      type="radio"
-                      name="color"
-                      value="green"
-                      checked={this.state.color === "green"}
-                      onChange={this.handleChange}
-                    />{" "}
-                    <i className="green large square full icon"></i>{" "}
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      name="color"
-                      value="yellow"
-                      checked={this.state.color === "yellow"}
-                      onChange={this.handleChange}
-                    />{" "}
-                    <i className="yellow large square full icon"></i>{" "}
-                  </label>
-                  <br />
-                  <div className="ui field">
-                    <label>
-                      Date:
-                      <input
-                        type="date"
-                        name="date"
-                        value={this.state.date}
-                        onChange={this.handleChange}
-                      />
-                    </label>
+        <div className="section-batch">
+          <div className="row">
+            <div className="frame-single">
+              <SideBar />
+              <div className="frame-single__main">
+                <div className="section-top">
+                  <div className="col-1-of-2">
+                    <h1>Student overview </h1>
                   </div>
-                  <div className="ui field">
-                    <label>
-                      Your remark:
-                      <input
-                        type="text"
-                        name="remark"
-                        value={this.state.remark}
-                        onChange={this.handleChange}
+                  <div className="col-1-of-2">
+                    <button
+                      className="btn btn-sub"
+                      onClick={this.handleAddEvaluation}
+                    >
+                      <h4>
+                        <b>&#43;</b> Add Evaluation
+                      </h4>
+                    </button>
+                    {this.state.seen ? (
+                      <CreateNewEvaluation
+                        toggle={this.handleAddEvaluation}
+                        studentId={this.state.studentId}
+                        batchId={this.state.batchId}
                       />
-                    </label>
+                    ) : null}
+                    {this.state.login && !this.props.loggedIn ? (
+                      <LogInNotice toggle={this.handleAddEvaluation} />
+                    ) : null}
                   </div>
-                  <input type="submit" value="Save" className="ui button" />
                 </div>
-              </form>
+                {this.state.editMode && (
+                  <StudentForm
+                    onSubmit={this.onSubmit}
+                    onChange={this.onChange}
+                    values={this.state.formValues}
+                  />
+                )}
+                {!this.state.editMode && (
+                  <div className="section-body">
+                    <div className="frame__left">
+                      <img
+                        src={this.props.student.photo}
+                        alt="student"
+                        className="image-student"
+                      />
+                      <button
+                        onClick={this.onEdit}
+                        className="btn btn-main btn-input"
+                      >
+                        <h5>Edit</h5>
+                      </button>
+                    </div>
+                    <div className="frame__right">
+                      <h2>Name: {this.props.student.name}</h2>
+                      <h4> Class: {this.props.student.batchId}</h4>
+                      <h4>Latest grade:</h4>
+                      <div>
+                        {this.props.grades.map(grade => (
+                          <i
+                            key={grade.id}
+                            className={grade.color + " large square full icon"}
+                            style={{ float: "none" }}
+                          ></i>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -202,12 +140,12 @@ export class EvaluationPage extends Component {
 const mapStateToProps = state => {
   return {
     student: state.student,
-    grades: state.evaluations
+    grades: state.evaluations,
+    loggedIn: !!state.auth
   };
 };
 export default connect(mapStateToProps, {
   loadStudent,
   evaluateStudent,
-  addEvaluation,
   editStudent
 })(EvaluationPage);
