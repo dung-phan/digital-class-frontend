@@ -38,7 +38,6 @@ export const loadStudent = (batchId, studentId) => dispatch => {
     .catch(console.error);
 };
 export const addStudent = (batchId, student) => (dispatch, getState) => {
-  console.log("what is student", student);
   superagent
     .post(`${baseUrl}/batches/${batchId}/students`)
     .send(student)

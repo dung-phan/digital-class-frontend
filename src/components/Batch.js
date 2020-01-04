@@ -74,44 +74,41 @@ export class Batch extends Component {
                     <h2>Please wait...</h2>
                   ) : (
                     <div>
-                      {!this.state.editMode &&
-                        this.props.batches.map(batch => (
-                          <li
-                            style={{ listStyle: "none" }}
-                            key={batch.id}
-                            className="col-1-of-2"
-                          >
-                            <div className="card">
-                              <div className="col-1-of-5">
-                                <h3 style={{ textAlign: "center" }}>
-                                  <Link
-                                    className="batch-link"
-                                    to={`/batches/${batch.id}/students`}
-                                  >
-                                    Class {batch.batchNumber}
-                                  </Link>
-                                </h3>
-                              </div>
-                              <div className="col-2-of-5">
-                                <h5>Start: {batch.startDate}</h5>
-                                <h5>End: {batch.endDate}</h5>
-                              </div>
-                              <div className="col-1-of-5">
-                                <h5 style={{ textAlign: "center" }}>
-                                  Total: 20
-                                </h5>
-                              </div>
-                              <span>
-                                <i className="icon ion-md-more"></i>
-                              </span>
-                              <span
-                                onClick={() => this.props.deleteBatch(batch.id)}
-                              >
-                                <i className="icon ion-md-close"></i>
-                              </span>
+                      {this.props.batches.map(batch => (
+                        <li
+                          style={{ listStyle: "none" }}
+                          key={batch.id}
+                          className="col-1-of-2"
+                        >
+                          <div className="card">
+                            <div className="col-1-of-5">
+                              <h3 style={{ textAlign: "center" }}>
+                                <Link
+                                  className="batch-link"
+                                  to={`/batches/${batch.id}/students`}
+                                >
+                                  Class {batch.batchNumber}
+                                </Link>
+                              </h3>
                             </div>
-                          </li>
-                        ))}
+                            <div className="col-2-of-5">
+                              <h5>Start: {batch.startDate}</h5>
+                              <h5>End: {batch.endDate}</h5>
+                            </div>
+                            <div className="col-1-of-5">
+                              <h5 style={{ textAlign: "center" }}>Total: 20</h5>
+                            </div>
+                            <span>
+                              <i className="icon ion-md-more"></i>
+                            </span>
+                            <span
+                              onClick={() => this.props.deleteBatch(batch.id)}
+                            >
+                              <i className="icon ion-md-close"></i>
+                            </span>
+                          </div>
+                        </li>
+                      ))}
                     </div>
                   )}
                 </div>

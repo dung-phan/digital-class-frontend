@@ -20,12 +20,16 @@ export const evaluateStudent = (batchId, id) => dispatch => {
     .then(response => dispatch(studentEvaluate(response.body)))
     .catch(console.error);
 };
-export const addEvaluation = (batchId, id, color, date, remark) => dispatch => {
+export const addEvaluation = (batchId, id, color, date, remark) => (
+  dispatch,
+  getState
+) => {
+  //const token = getState().auth;
   superagent
     .post(`${baseUrl}/batches/${batchId}/students/${id}/evaluations`)
-    // .set('Authorization', `Bearer ${getState().user}`)
-    .send({ color: color, date: date, remark: remark })
-    .then(() => dispatch(studentEvaluationAdd({ color, date, remark })))
+    //.set("Authorization", `Bearer ${token}`)
+    .send({ color, date, remark })
+    .then(response => dispatch(studentEvaluationAdd(response.body)))
     .catch(console.error);
 };
 //load evaluations of a single batch
