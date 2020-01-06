@@ -10,10 +10,6 @@ class CreateNewEvaluation extends Component {
   };
   handleChange = event => {
     const { name, value } = event.target;
-    const { grades } = this.props;
-    // if (grades.find(grade => grade.date === value)) {
-    //   alert("Date already exists!");
-    // } else {
     this.setState({
       [name]: value
     });

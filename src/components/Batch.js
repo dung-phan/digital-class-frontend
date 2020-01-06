@@ -62,16 +62,16 @@ export class Batch extends Component {
                           className="search-txt"
                           placeholder="Type class number..."
                         />
-                        <a className="search-btn">
+                        <span className="search-btn">
                           <i className="icon ion-ios-search"></i>
-                        </a>
+                        </span>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="section-body">
                   {!this.props.batches || this.props.batches.length === 0 ? (
-                    <h2>Please wait...</h2>
+                    <h3>Please wait...</h3>
                   ) : (
                     <div>
                       {this.props.batches.map(batch => (
@@ -121,7 +121,6 @@ export class Batch extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log("what is state", state);
   return {
     batches: state.batches,
     loggedIn: !!state.auth
