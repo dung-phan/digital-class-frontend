@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loadStudent, editStudent } from "../actions/students";
 import { evaluateStudent } from "../actions/evaluations";
+import { Link } from "react-router-dom";
 import StudentForm from "./StudentForm";
 import CreateNewEvaluation from "./CreateNewEvaluation";
 import LogInNotice from "./LogInNotice";
@@ -115,7 +116,11 @@ export class EvaluationPage extends Component {
                     </div>
                     <div className="frame__right">
                       <h2>Name: {this.props.student.name}</h2>
-                      <h4> Class: {this.props.student.batchId}</h4>
+                      <Link
+                        to={`/batches/${this.props.student.batchId}/students`}
+                      >
+                        <h4> Class: {this.props.student.batchId}</h4>
+                      </Link>
                       <h4>Latest grade:</h4>
                       <div>
                         {this.props.grades.map(grade => (

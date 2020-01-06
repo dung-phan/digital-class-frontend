@@ -71,7 +71,7 @@ export class Batch extends Component {
                 </div>
                 <div className="section-body">
                   {!this.props.batches || this.props.batches.length === 0 ? (
-                    <h2>Please wait...</h2>
+                    <h3>Please wait...</h3>
                   ) : (
                     <div>
                       {this.props.batches.map(batch => (
