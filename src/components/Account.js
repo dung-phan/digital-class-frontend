@@ -39,89 +39,102 @@ class Account extends Component {
   render() {
     return (
       <div className="body-page">
-        <div className={this.state.className}>
-          <div className="formcontainer sign-up-container">
-            <form onSubmit={this.handleSubmitSignUp}>
-              <h1 style={{ color: "rgba(111, 106, 175, 0.856)" }}>Sign up</h1>
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={this.state.email}
-                onChange={this.handleSignUp}
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                onChange={this.handleSignUp}
-                value={this.state.password}
-              />
-              <button className="btn btn-main" style={{ margin: "2rem" }}>
-                <h5 style={{ color: "rgb(38, 34, 78)" }}>Sign Up</h5>
-              </button>
-            </form>
-
-            <Link className="link" to="/">
-              <h4 className="link-text"> &#8592; Back to home</h4>
-            </Link>
-          </div>
-          <div className="formcontainer sign-in-container">
-            <form onSubmit={this.handleSubmitSignIn}>
-              <h1 style={{ color: "rgb(38, 34, 78)" }}>Sign in</h1>
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={this.state.email}
-                onChange={this.handleSignIn}
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                onChange={this.handleSignIn}
-                value={this.state.password}
-              />
-              <button className="btn btn-main" style={{ margin: "2rem" }}>
-                <h4 style={{ color: "rgb(38, 34, 78)" }}>Sign In</h4>
-              </button>
-            </form>
-            <Link className="link" to="/">
-              <h4 className="link-text"> &#8592; Back to home</h4>
-            </Link>
-          </div>
-          <div className="overlay-container">
-            <div className="overlay">
-              <div className="overlay-panel overlay-left">
-                <h1>Welcome back!</h1>
-                <h4 style={{ color: "white" }}>Please log in to continue</h4>
-                <button
-                  className="btn btn-sub"
-                  onClick={this.handleSignInAgain}
-                  style={{ margin: "2rem" }}
-                >
-                  <h4 style={{ color: "white" }}>Sign In</h4>
+        {!this.props.loggedIn ? (
+          <div className={this.state.className}>
+            <div className="formcontainer sign-up-container">
+              <form onSubmit={this.handleSubmitSignUp}>
+                <h1 style={{ color: "rgba(111, 106, 175, 0.856)" }}>Sign up</h1>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleSignUp}
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  onChange={this.handleSignUp}
+                  value={this.state.password}
+                />
+                <button className="btn btn-main" style={{ margin: "2rem" }}>
+                  <h5 style={{ color: "rgb(38, 34, 78)" }}>Sign Up</h5>
                 </button>
-              </div>
-              <div className="overlay-panel overlay-right">
-                <h1>Hello, Friend!</h1>
-                <h4 style={{ color: "white" }}>
-                  Enter your details & start the journey
-                </h4>
-                <button
-                  className="btn btn-sub"
-                  onClick={this.handleSignUp}
-                  style={{ margin: "2rem" }}
-                >
-                  <h4 style={{ color: "white" }}>Sign Up</h4>
+              </form>
+              <Link className="link" to="/">
+                <h4 className="link-text"> &#8592; Back to home</h4>
+              </Link>
+            </div>
+            <div className="formcontainer sign-in-container">
+              <form onSubmit={this.handleSubmitSignIn}>
+                <h1 style={{ color: "rgb(38, 34, 78)" }}>Sign in</h1>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleSignIn}
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  onChange={this.handleSignIn}
+                  value={this.state.password}
+                />
+                <button className="btn btn-main" style={{ margin: "2rem" }}>
+                  <h4 style={{ color: "rgb(38, 34, 78)" }}>Sign In</h4>
                 </button>
+              </form>
+              <Link className="link" to="/">
+                <h4 className="link-text"> &#8592; Back to home</h4>
+              </Link>
+            </div>
+            <div className="overlay-container">
+              <div className="overlay">
+                <div className="overlay-panel overlay-left">
+                  <h1>Welcome back!</h1>
+                  <h4 style={{ color: "white" }}>Please log in to continue</h4>
+                  <button
+                    className="btn btn-sub"
+                    onClick={this.handleSignInAgain}
+                    style={{ margin: "2rem" }}
+                  >
+                    <h4 style={{ color: "white" }}>Sign In</h4>
+                  </button>
+                </div>
+                <div className="overlay-panel overlay-right">
+                  <h1>Hello, Friend!</h1>
+                  <h4 style={{ color: "white" }}>
+                    Enter your details & start the journey
+                  </h4>
+                  <button
+                    className="btn btn-sub"
+                    onClick={this.handleSignUp}
+                    style={{ margin: "2rem" }}
+                  >
+                    <h4 style={{ color: "white" }}>Sign Up</h4>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="formcontainer">
+            <h1>Hey, you're already logged in</h1>
+            <Link className="link" to="/">
+              <h4 className="link-text"> &#8592; Back to home</h4>
+            </Link>
+          </div>
+        )}
       </div>
     );
   }
 }
-export default connect(null, { signup, login })(Account);
+const mapStateToProps = state => {
+  return {
+    loggedIn: !!state.auth
+  };
+};
+export default connect(mapStateToProps, { signup, login })(Account);

@@ -143,10 +143,14 @@ class BatchDetails extends React.Component {
                                 </span>
                               </div>
                               <div>
-                                <h5>
-                                  <i className="icon ion-ios-settings"></i>
-                                  Edit
-                                </h5>
+                                <Link
+                                  to={`/batches/${student.batchId}/students/${student.id}/evaluations`}
+                                >
+                                  <h5>
+                                    <i className="icon ion-ios-settings"></i>
+                                    Edit
+                                  </h5>
+                                </Link>
                               </div>
                             </div>
                           </div>
