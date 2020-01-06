@@ -5,19 +5,17 @@ import CreateNewStudent from "../components/CreateNewStudent";
 import LogInNotice from "./LogInNotice";
 import SideBar from "./SideBar";
 import ClassProgress from "./ClassProgress";
+import ChosenStudent from "./ChosenStudent";
 import { Link } from "react-router-dom";
 class BatchDetails extends React.Component {
   state = {
     seen: false,
     login: false,
-    studentname: "",
-    studentphoto: ""
+    chosen: false
   };
-
   componentDidMount() {
     this.props.loadStudents(this.props.match.params.id);
   }
-
   handleAddStudent = () => {
     if (this.props.loggedIn) {
       this.setState({
@@ -28,8 +26,11 @@ class BatchDetails extends React.Component {
       login: !this.state.login
     });
   };
-
-  //render on the page
+  handleAskStudent = () => {
+    this.setState({
+      chosen: !this.state.chosen
+    });
+  };
   render() {
     return (
       <div className="section-single">
@@ -55,14 +56,6 @@ class BatchDetails extends React.Component {
                         <b>&#43;</b> Add student
                       </h4>
                     </button>
-                  </div>
-
-                  <div className="col-1-of-3">
-                    <button className="btn btn-sub">
-                      <h4>
-                        <b>&#63;</b> Ask a student
-                      </h4>
-                    </button>
                     {this.state.seen ? (
                       <CreateNewStudent
                         batchId={this.props.match.params.id}
@@ -74,6 +67,23 @@ class BatchDetails extends React.Component {
                     ) : null}
                   </div>
                   <div className="col-1-of-3">
+                    <button
+                      className="btn btn-sub"
+                      onClick={this.handleAskStudent}
+                    >
+                      <h4>
+                        <b>&#63;</b> Ask a student
+                      </h4>
+                    </button>
+                    {this.state.chosen ? (
+                      <ChosenStudent
+                        classId={this.props.match.params.id}
+                        students={this.props.students}
+                        toggle={this.handleAskStudent}
+                      />
+                    ) : null}
+                  </div>
+                  <div className="col-1-of-3">
                     <div className="search-box">
                       <input
                         type="text"
@@ -81,9 +91,9 @@ class BatchDetails extends React.Component {
                         className="search-txt"
                         placeholder="Type student ID"
                       />
-                      <a className="search-btn">
+                      <span className="search-btn">
                         <i className="icon ion-ios-search"></i>
-                      </a>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -152,7 +162,6 @@ class BatchDetails extends React.Component {
     );
   }
 }
-
 const mapStateToProps = state => {
   return {
     students: state.students,

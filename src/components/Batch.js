@@ -62,9 +62,9 @@ export class Batch extends Component {
                           className="search-txt"
                           placeholder="Type class number..."
                         />
-                        <a className="search-btn">
+                        <span className="search-btn">
                           <i className="icon ion-ios-search"></i>
-                        </a>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -121,7 +121,6 @@ export class Batch extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log("what is state", state);
   return {
     batches: state.batches,
     loggedIn: !!state.auth
