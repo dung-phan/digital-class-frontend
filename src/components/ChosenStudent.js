@@ -77,7 +77,7 @@ class ChosenStudent extends Component {
           </span>
           <div className="">
             <button className="btn btn-sub" onClick={this.chooseRandomStudent}>
-              Choose
+              <p>Choose</p>
             </button>
             <p>{this.state.studentname}</p>
             <img

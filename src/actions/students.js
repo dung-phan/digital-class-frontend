@@ -47,8 +47,11 @@ export const addStudent = (batchId, student) => (dispatch, getState) => {
 export const editStudent = (batchId, studentId, student) => dispatch => {
   superagent
     .put(`${baseUrl}/batches/${batchId}/students/${studentId}`)
-    .send({ student })
-    .then(() => dispatch(studentEdit(student)))
+    .send(student)
+    .then(response => dispatch(studentEdit(response.body)))
+    .then(() => {
+      console.log("what is student", student);
+    })
     .catch(console.error);
 };
 export const deleteStudent = (batchId, id) => dispatch => {

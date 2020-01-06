@@ -1,4 +1,4 @@
-import { STUDENT_FETCHED, STUDENT_EDITED } from '../actions/students';
+import { STUDENT_FETCHED, STUDENT_EDITED } from "../actions/students";
 
 export default (state = [], action = {}) => {
   switch (action.type) {
