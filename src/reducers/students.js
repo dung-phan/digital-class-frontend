@@ -11,10 +11,7 @@ export default (state = [], action = {}) => {
     case STUDENT_ADDED:
       return [...state, action.student];
     case STUDENT_DELETED:
-      console.log("check reducer state", state);
-      console.log("check action", action);
       return state.filter(student => student.id !== action.studentId);
-
     default:
       return state;
   }
