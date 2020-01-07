@@ -35,22 +35,23 @@
 }
 .batch-link {
   color: $primary-color-dark;
+  &:hover {
+    color: white;
+  }
 }
-.batch-link:hover {
-  color: white;
-}
-
-i.ion-md-close {
-  display: block;
-}
-i.ion-md-more {
-  padding: 15px;
-  float: left;
-  transform: translate(100%, 38%);
-}
-i.ion-md-close:hover {
-  color: white;
-}
-i.ion-md-more:hover {
-  color: white;
+i.ion-md {
+  &-close {
+    display: block;
+    &:hover {
+      color: white;
+    }
+  }
+  &-more {
+    padding: 15px;
+    float: left;
+    transform: translate(100%, 38%);
+    &:hover {
+      color: white;
+    }
+  }
 }

@@ -49,9 +49,7 @@ export const editStudent = (batchId, studentId, student) => dispatch => {
     .put(`${baseUrl}/batches/${batchId}/students/${studentId}`)
     .send(student)
     .then(response => dispatch(studentEdit(response.body)))
-    .then(() => {
-      console.log("what is student", student);
-    })
+    .then(() => {})
     .catch(console.error);
 };
 export const deleteStudent = (batchId, id) => dispatch => {

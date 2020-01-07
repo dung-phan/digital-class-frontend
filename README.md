@@ -16,8 +16,8 @@ This is my own attempt to build a full stack React app for 4 days.
 
 #### 👀👇 Click links to view some samples in this project 👇👀
 
-- **[react](./src/components/EvaluationPage.js)**
-- **[redux](./src/reducers/evaluations.js)**
+- **[react](./src/components/Batch.js)**
+- **[redux](./src/reducers/students.js)**
 - **[redux-thunk](./src/actions/students.js)**
 - **[SASS](./src/components/SignUp.js)**
 

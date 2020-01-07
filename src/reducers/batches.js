@@ -3,7 +3,6 @@ import {
   BATCH_CREATED,
   BATCH_DELETED
 } from "../actions/batches";
-
 export default (state = [], action = {}) => {
   switch (action.type) {
     case BATCHES_FETCHED:
