@@ -1,7 +1,7 @@
 .image-student {
   border-radius: 50%;
-  width: 90%;
-  margin: 5rem 0;
+  width: 80%;
+  margin: 3rem 0;
 }
 i.square {
   float: none;
@@ -30,4 +30,10 @@ input.checkbox {
   margin: 2rem 0;
   right: 40%;
   position: relative;
+}
+.section__top {
+  height: 10rem;
+  padding-top: 3rem;
+}
+.section__body {
 }

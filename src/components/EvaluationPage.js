@@ -62,12 +62,12 @@ export class EvaluationPage extends Component {
   render() {
     return (
       <div>
-        <div className="section-batch">
+        <div className="section-home">
           <div className="row">
             <div className="frame-single">
               <SideBar />
               <div className="frame-single__main">
-                <div className="section-top">
+                <div className="section__top">
                   <div className="col-1-of-2">
                     <h1>Student overview </h1>
                   </div>

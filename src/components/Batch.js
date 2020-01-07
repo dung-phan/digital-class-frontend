@@ -98,9 +98,6 @@ export class Batch extends Component {
                             <div className="col-1-of-5">
                               <h5 style={{ textAlign: "center" }}>Total: 20</h5>
                             </div>
-                            <span>
-                              <i className="icon ion-md-more"></i>
-                            </span>
                             <span
                               onClick={() => this.props.deleteBatch(batch.id)}
                             >
