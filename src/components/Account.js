@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { signup } from "../actions/signup";
 import { login } from "../actions/login";
-
+import { logout } from "../actions/signout";
+import { Redirect } from "react-router-dom";
 class Account extends Component {
-  state = { className: "container", email: "", password: "" };
+  state = { className: "container", email: "", password: "", navigate: false };
   handleSignIn = event => {
     event.preventDefault();
     this.setState({
@@ -29,14 +30,21 @@ class Account extends Component {
       className: "container"
     });
   };
-
   handleSignUp = event => {
     this.setState({
       className: "container right-panel-active",
       [event.target.name]: event.target.value
     });
   };
+  handleLogOut = () => {
+    this.props.logout();
+    localStorage.clear("auth");
+    this.setState({ navigate: true });
+  };
   render() {
+    if (this.state.navigate) {
+      return <Redirect to="/" push={true} />;
+    }
     return (
       <div className="body-page">
         {!this.props.loggedIn ? (
@@ -126,6 +134,13 @@ class Account extends Component {
             <Link className="link" to="/">
               <h4 className="link-text"> &#8592; Back to home</h4>
             </Link>
+            <button
+              className="btn btn-main"
+              style={{ marginTop: "2rem" }}
+              onClick={this.handleLogOut}
+            >
+              <h4>Log out</h4>
+            </button>
           </div>
         )}
       </div>
@@ -137,4 +152,4 @@ const mapStateToProps = state => {
     loggedIn: !!state.auth
   };
 };
-export default connect(mapStateToProps, { signup, login })(Account);
+export default connect(mapStateToProps, { signup, login, logout })(Account);
