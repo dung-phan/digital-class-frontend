@@ -4,7 +4,7 @@
 
 ## What this project is about
 
-This is my own attempt to build a full stack React app for 4 days.
+Digital class, a web application aimed to assist teachers with class management and evaluations for students.
 
 ## Table of contents:
 
@@ -13,6 +13,8 @@ This is my own attempt to build a full stack React app for 4 days.
 - **[Installation](#installation)**
 
 ## Technologies used
+
+The app is designed with React and state management Redux, styles with SASS.
 
 #### 👀👇 Click links to view some samples in this project 👇👀
 
@@ -23,14 +25,14 @@ This is my own attempt to build a full stack React app for 4 days.
 
 ## Features
 
-As a guess (without signup):
+As a GUESS (without signup):
 
 - You can sign up with your email and password
 - You can see a list of classes, identified with class number, start date and end date (ie: Class 1)
 - You can see a list of students in each class and the teachers' evaluations on their test results
 - You can also see the progress of each class based on their last performance
 
-As a teacher (account required)
+As a TEACHER (account required)
 
 - You can log in and log out with your account
 - You can create a new class and delete a class
