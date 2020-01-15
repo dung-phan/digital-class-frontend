@@ -4,7 +4,7 @@ import { loadEvaluations } from "../actions/evaluations";
 import _ from "lodash";
 class ChosenStudent extends Component {
   state = {
-    studentname: "Click Choose to pick one",
+    studentname: "Click 'Choose' to pick one",
     studentphoto:
       "https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg"
   };

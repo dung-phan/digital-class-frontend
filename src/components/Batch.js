@@ -2,13 +2,21 @@ import React, { Component } from "react";
 import { loadBatches, deleteBatch } from "../actions/batches";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { css } from "@emotion/core";
+import ClipLoader from "react-spinners/ClipLoader";
 import CreateNewBatch from "./CreateNewBatch";
 import LogInNotice from "./LogInNotice";
 import SideBar from "./SideBar";
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: #6f6aafda;
+`;
 export class Batch extends Component {
   state = {
     seen: false,
-    login: false
+    login: false,
+    loading: true
   };
   componentDidMount() {
     this.props.loadBatches();
@@ -71,7 +79,14 @@ export class Batch extends Component {
                 </div>
                 <div className="section-body">
                   {!this.props.batches || this.props.batches.length === 0 ? (
-                    <h3>Please wait...</h3>
+                    <div className="app-loading">
+                      <ClipLoader
+                        css={override}
+                        size={50}
+                        color={"#6f6aafda"}
+                        loading={this.state.loading}
+                      />
+                    </div>
                   ) : (
                     <div>
                       {this.props.batches.map(batch => (
